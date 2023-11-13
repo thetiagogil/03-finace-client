@@ -1,14 +1,22 @@
 import { createContext, useEffect, useState } from "react";
+
 export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState();
-  const [isAuthenticated, setIsAuthenticat] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
 
   const handleLogin = async (currentToken) => {
     setIsLoading(true);
+
+    if (!currentToken) {
+      console.error("Token is missing");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/auth/verify`,
@@ -18,18 +26,23 @@ const AuthContextProvider = ({ children }) => {
           },
         }
       );
+
       if (response.ok) {
         setToken(currentToken);
-        setIsAuthenticat(true);
+        setIsAuthenticated(true);
         const parsed = await response.json();
         setCurrentUser(parsed.userId);
         window.localStorage.setItem("authToken", currentToken);
+      } else {
+        // Handle other errors (e.g., log, show an error message)
+        console.error(`Error: ${response.status} - ${response.statusText}`);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error during login:", error.message);
     }
     setIsLoading(false);
   };
+
   useEffect(() => {
     const tokenFromStorage = window.localStorage.getItem("authToken");
     if (tokenFromStorage) {
@@ -52,14 +65,19 @@ const AuthContextProvider = ({ children }) => {
           body: JSON.stringify(body),
         }
       );
+
       if (response.ok) {
         const parsed = await response.json();
         callback(parsed);
+      } else {
+        // Handle other errors
+        console.error(`Error: ${response.status} - ${response.statusText}`);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error during fetchWithToken:", error.message);
     }
   };
+
   return (
     <AuthContext.Provider
       value={{
