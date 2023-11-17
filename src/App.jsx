@@ -4,8 +4,10 @@ import HomePage from "./pages/homepage/HomePage";
 import SignupPage from "./pages/auths/SignupPage";
 import LoginPage from "./pages/auths/LoginPage";
 import DashboardPage from "./pages/dashboardpage/DashboardPage";
-import OverviewPage from "./pages/overviewpage/OverviewPage";
-import TransactionsPage from "./pages/transactionspage/TransactionsPage";
+import OverviewTrackedPage from "./pages/overviewpage/OverviewTrackedPage";
+import OverviewPlannedPage from "./pages/overviewpage/OverviewPlannedPage";
+import TransactionsTrackedPage from "./pages/transactionspage/TransactionsTrackedPage";
+import TransactionsPlannedPage from "./pages/transactionspage/TransactionsPlannedPage";
 import NavbarHorizontal from "./components/navbar/NavbarHorizontal";
 import NavbarVertical from "./components/navbar/NavbarVertical";
 
@@ -35,8 +37,10 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/overview" element={<OverviewPage />} />
-        <Route path="/transactions" element={<TransactionsPage />} />
+        <Route path="/overview/tracked" element={<OverviewTrackedPage />} />
+        <Route path="/overview/planned" element={<OverviewPlannedPage />} />
+        <Route path="/transactions/tracked" element={<TransactionsTrackedPage />} />
+        <Route path="/transactions/planned" element={<TransactionsPlannedPage />} />
       </Routes>
     </div>
   );
