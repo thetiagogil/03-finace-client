@@ -1,0 +1,82 @@
+.auths-form {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 4rem;
+  padding: 2rem;
+  border-radius: 0.3rem;
+}
+
+.auths-form h2 {
+  margin-bottom: 2rem;
+}
+
+.auths-form label p {
+  margin-bottom: 1rem;
+}
+
+.auths-form label input {
+  background-color: rgb(240, 240, 245);
+  color: rgb(35, 45, 55);
+  height: 2rem;
+  font-size: 0.9rem;
+  border: none;
+  outline: none;
+  border-radius: 0.3rem;
+  padding-left: 1rem;
+}
+
+.auths-form-names label input {
+  width: 6rem;
+}
+
+.auths-form-names-first {
+  margin-right: 1rem;
+}
+
+.auths-form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auths-form-inputs label input {
+  width: 14rem;
+}
+
+.auths-form button {
+  background-color: rgb(35, 45, 55, 0.7);
+  color: white;
+  width: 5rem;
+  padding: 0.4rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition-duration: 0.5s;
+}
+
+.auths-form button:hover {
+  background-color: rgb(35, 45, 55, 0.9);
+  border-radius: 0rem;
+}
+
+.auths-true {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.auths-true a {
+  color: rgb(60, 180, 240);
+}
+
+.auths-form-error {
+  border: 1px solid rgba(255, 0, 0, 0.25);
+  border-radius: 0.3rem;
+}
+
+.auths-form-error-p {
+  color: rgba(255, 0, 0, 0.4);
+}

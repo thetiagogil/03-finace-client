@@ -1,6 +1,7 @@
+import "./Auths.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -40,17 +41,17 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <div className="container">
-        <h1>Login</h1>
+    <div className="container">
+      <form onSubmit={handleSubmit} className="auths-form">
+        <h2>Log in to Fin/Ace</h2>
 
-        <form onSubmit={handleSubmit}>
+        <div className="auths-form-inputs">
           <label>
             <input
               value={username}
               onChange={(event) => setUsername(event.target.value)}
               required
-              placeholder="username"
+              placeholder="Username"
             />
           </label>
 
@@ -60,16 +61,21 @@ const LoginPage = () => {
               onChange={(event) => setPassword(event.target.value)}
               required
               type="password"
-              placeholder="password"
+              placeholder="Password"
             />
           </label>
+        </div>
 
-          <button type="submit">
-            Log In
-          </button>
-        </form>
-      </div>
-    </>
+        <button>Log In</button>
+
+        <div className="auths-true">
+          <p>Not registered?</p>
+          <Link to="/signup">
+            <p>Create an account</p>
+          </Link>
+        </div>
+      </form>
+    </div>
   );
 };
 

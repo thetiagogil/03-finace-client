@@ -1,5 +1,6 @@
+import "./Auths.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -9,9 +10,22 @@ const SignupPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!email.includes("@")) {
+      setError("Please enter a valid email.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     const payload = { firstname, lastname, username, email, password };
 
     try {
@@ -29,23 +43,27 @@ const SignupPage = () => {
       if (response.status === 201) {
         await response.json();
         navigate("/login");
+      } else {
+        setError("Signup failed. Please try again.");
       }
     } catch (error) {
-      console.log(error);
+      setError("An error occurred. Please try again later.");
     }
   };
 
   return (
-      <div className="container">
-        <h1>Signup</h1>
+    <div className="container">
+      <form onSubmit={handleSubmit} className="auths-form">
+        <h2>Create an account</h2>
 
-        <form onSubmit={handleSubmit}>
+        <div className="auths-form-names">
           <label>
             <input
               value={firstname}
               onChange={(event) => setFirstname(event.target.value)}
               required
-              placeholder="first name"
+              placeholder="First name"
+              className="auths-form-names-first"
             />
           </label>
 
@@ -54,43 +72,77 @@ const SignupPage = () => {
               value={lastname}
               onChange={(event) => setLastname(event.target.value)}
               required
-              placeholder="last name"
+              placeholder="Last name"
             />
           </label>
+        </div>
 
+        <div className="auths-form-inputs">
           <label>
             <input
               value={username}
               onChange={(event) => setUsername(event.target.value)}
               required
-              placeholder="username"
+              placeholder="Username"
             />
           </label>
 
-          <label>
+          <label
+            className={
+              error && error.includes("email") ? "auths-form-error" : ""
+            }
+          >
             <input
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               required
-              placeholder="email"
+              placeholder="Email"
             />
           </label>
 
-          <label>
+          <label
+            className={
+              error && error.includes("Password") ? "auths-form-error" : ""
+            }
+          >
             <input
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               required
               type="password"
-              placeholder="password"
+              placeholder="Password"
             />
           </label>
 
-          <button className="loginBtn" type="submit">
-            Register
-          </button>
-        </form>
-      </div>
+          <label
+            className={
+              error && error.includes("Password") ? "auths-form-error" : ""
+            }
+          >
+            <input
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              required
+              type="password"
+              placeholder="Confirm Password"
+            />
+          </label>
+        </div>
+
+        {error && <p className="auths-form-error-p">{error}</p>}
+
+        <button className="auths-button" type="submit">
+          Sign Up
+        </button>
+
+        <div className="auths-true">
+          <p>Already have an account?</p>
+          <Link to="/login">
+            <p>Log in</p>
+          </Link>
+        </div>
+      </form>
+    </div>
   );
 };
 
