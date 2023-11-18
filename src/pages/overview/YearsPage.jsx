@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
-const YearsPage = ({ page, type }) => {
+const YearsPage = ({ pageProp, typeProp }) => {
   const token = localStorage.getItem("authToken");
   const { currentUser } = useContext(AuthContext);
 
@@ -35,7 +35,7 @@ const YearsPage = ({ page, type }) => {
   // FILTER DATA BY YEARS
   const filterYears = () => {
     let yearsArray = [];
-    const typeUpperCase = type.charAt(0).toUpperCase() + type.slice(1);
+    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
 
     data.map((oneData) => {
       if (
@@ -59,7 +59,7 @@ const YearsPage = ({ page, type }) => {
     <div className="container">
       {filterYears().map((oneYear, index) => (
         <div key={index}>
-          <Link to={`/${page}/${type}/${oneYear}`}>
+          <Link to={`/${pageProp}/${typeProp}/${oneYear}`}>
             <p>{oneYear}</p>
           </Link>
         </div>

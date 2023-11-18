@@ -40,11 +40,11 @@ function App() {
         {/* OVERVIEW ROUTES */}
         <Route
           path="/overview/tracked"
-          element={<YearsPage page="overview" typeProp="tracked" />}
+          element={<YearsPage pageProp="overview" typeProp="tracked" />}
         />
         <Route
           path="/overview/planned"
-          element={<YearsPage page="overview" typeProp="planned" />}
+          element={<YearsPage pageProp="overview" typeProp="planned" />}
         />
         <Route
           path="/overview/tracked/:year"
