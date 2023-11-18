@@ -1,13 +1,17 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-import HomePage from "./pages/homepage/HomePage";
+import HomePage from "./pages/home/HomePage";
 import SignupPage from "./pages/auths/SignupPage";
 import LoginPage from "./pages/auths/LoginPage";
-import DashboardPage from "./pages/dashboardpage/DashboardPage";
-import OverviewTrackedPage from "./pages/overviewpage/OverviewTrackedPage";
-import OverviewPlannedPage from "./pages/overviewpage/OverviewPlannedPage";
-import TransactionsTrackedPage from "./pages/transactionspage/TransactionsTrackedPage";
-import TransactionsPlannedPage from "./pages/transactionspage/TransactionsPlannedPage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
+import OverviewTrackedYearsPage from "./pages/overview/tracked/OverviewTrackedYearsPage";
+import OverviewTrackedMonthsPage from "./pages/overview/tracked/OverviewTrackedMonthsPage";
+import OverviewPlannedYearsPage from "./pages/overview/planned/OverviewPlannedYearsPage";
+import OverviewPlannedMonthsPage from "./pages/overview/planned/OverviewPlannedMonthsPage";
+import TransactionsTrackedYearsPage from "./pages/transactions/tracked/TransactionsTrackedYearsPage";
+import TransactionsTrackedMonthsPage from "./pages/transactions/tracked/TransactionsTrackedMonthsPage";
+import TransactionsPlannedYearsPage from "./pages/transactions/planned/TransactionsPlannedYearsPage";
+import TransactionsPlannedMonthsPage from "./pages/transactions/planned/TransactionsPlannedMonthsPage";
 import NavbarHorizontal from "./components/navbar/NavbarHorizontal";
 import NavbarVertical from "./components/navbar/NavbarVertical";
 
@@ -37,10 +41,42 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/overview/tracked" element={<OverviewTrackedPage />} />
-        <Route path="/overview/planned" element={<OverviewPlannedPage />} />
-        <Route path="/transactions/tracked" element={<TransactionsTrackedPage />} />
-        <Route path="/transactions/planned" element={<TransactionsPlannedPage />} />
+
+        {/* OVERVIEW ROUTES */}
+        <Route
+          path="/overview/tracked"
+          element={<OverviewTrackedYearsPage />}
+        />
+        <Route
+          path="/overview/tracked/:year"
+          element={<OverviewTrackedMonthsPage />}
+        />
+        <Route
+          path="/overview/planned"
+          element={<OverviewPlannedYearsPage />}
+        />
+        <Route
+          path="/overview/planned/:year"
+          element={<OverviewPlannedMonthsPage />}
+        />
+
+        {/* TRANSACTIONS ROUTES */}
+        <Route
+          path="/transactions/tracked"
+          element={<TransactionsTrackedYearsPage />}
+        />
+        <Route
+          path="/transactions/tracked/:year"
+          element={<TransactionsTrackedMonthsPage />}
+        />
+        <Route
+          path="/transactions/planned"
+          element={<TransactionsPlannedYearsPage />}
+        />
+        <Route
+          path="/transactions/planned/:year"
+          element={<TransactionsPlannedMonthsPage />}
+        />
       </Routes>
     </div>
   );
