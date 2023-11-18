@@ -4,14 +4,9 @@ import HomePage from "./pages/home/HomePage";
 import SignupPage from "./pages/auths/SignupPage";
 import LoginPage from "./pages/auths/LoginPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
-import OverviewTrackedYearsPage from "./pages/overview/tracked/OverviewTrackedYearsPage";
-import OverviewTrackedMonthsPage from "./pages/overview/tracked/OverviewTrackedMonthsPage";
-import OverviewPlannedYearsPage from "./pages/overview/planned/OverviewPlannedYearsPage";
-import OverviewPlannedMonthsPage from "./pages/overview/planned/OverviewPlannedMonthsPage";
-import TransactionsTrackedYearsPage from "./pages/transactions/tracked/TransactionsTrackedYearsPage";
-import TransactionsTrackedMonthsPage from "./pages/transactions/tracked/TransactionsTrackedMonthsPage";
-import TransactionsPlannedYearsPage from "./pages/transactions/planned/TransactionsPlannedYearsPage";
-import TransactionsPlannedMonthsPage from "./pages/transactions/planned/TransactionsPlannedMonthsPage";
+import YearsPage from "./pages/years/YearsPage";
+import OverviewMonthsPage from "./pages/overview/OverviewMonthsPage";
+import TransactionsMonthsPage from "./pages/transactions/TransactionsMonthsPage";
 import NavbarHorizontal from "./components/navbar/NavbarHorizontal";
 import NavbarVertical from "./components/navbar/NavbarVertical";
 
@@ -45,37 +40,37 @@ function App() {
         {/* OVERVIEW ROUTES */}
         <Route
           path="/overview/tracked"
-          element={<OverviewTrackedYearsPage />}
-        />
-        <Route
-          path="/overview/tracked/:year"
-          element={<OverviewTrackedMonthsPage />}
+          element={<YearsPage page="overview" type="tracked" />}
         />
         <Route
           path="/overview/planned"
-          element={<OverviewPlannedYearsPage />}
+          element={<YearsPage page="overview" type="planned" />}
+        />
+        <Route
+          path="/overview/tracked/:year"
+          element={<OverviewMonthsPage />}
         />
         <Route
           path="/overview/planned/:year"
-          element={<OverviewPlannedMonthsPage />}
+          element={<OverviewMonthsPage />}
         />
 
         {/* TRANSACTIONS ROUTES */}
         <Route
           path="/transactions/tracked"
-          element={<TransactionsTrackedYearsPage />}
-        />
-        <Route
-          path="/transactions/tracked/:year"
-          element={<TransactionsTrackedMonthsPage />}
+          element={<YearsPage page="transactions" type="tracked" />}
         />
         <Route
           path="/transactions/planned"
-          element={<TransactionsPlannedYearsPage />}
+          element={<YearsPage page="transactions" type="planned" />}
+        />
+        <Route
+          path="/transactions/tracked/:year"
+          element={<TransactionsMonthsPage />}
         />
         <Route
           path="/transactions/planned/:year"
-          element={<TransactionsPlannedMonthsPage />}
+          element={<TransactionsMonthsPage />}
         />
       </Routes>
     </div>

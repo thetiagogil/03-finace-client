@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
-const OverviewTrackedPage = () => {
+const TransactionsTrackedYearsPage = ({ page, type }) => {
   const token = localStorage.getItem("authToken");
   const { currentUser } = useContext(AuthContext);
 
@@ -38,9 +38,13 @@ const OverviewTrackedPage = () => {
 
   const filterYears = () => {
     let yearsArray = [];
+    const typeUpperCase = type.charAt(0).toUpperCase() + type.slice(1);
 
     data.forEach((oneData) => {
-      if (!yearsArray.includes(oneData.year) && oneData.type === "Tracked") {
+      if (
+        !yearsArray.includes(oneData.year) &&
+        oneData.type === typeUpperCase
+      ) {
         yearsArray.push(oneData.year);
       }
     });
@@ -54,7 +58,7 @@ const OverviewTrackedPage = () => {
       {filterYears().map((oneYear, index) => {
         return (
           <div key={index}>
-            <Link to={`/overview/tracked/${oneYear}`}>
+            <Link to={`/${page}/${type}/${oneYear}`}>
               <p>{oneYear}</p>
             </Link>
           </div>
@@ -64,4 +68,4 @@ const OverviewTrackedPage = () => {
   );
 };
 
-export default OverviewTrackedPage;
+export default TransactionsTrackedYearsPage;
