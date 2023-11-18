@@ -1,14 +1,15 @@
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
-const TransactionsTrackedYearsPage = ({ page, type }) => {
+const YearsPage = ({ page, type }) => {
   const token = localStorage.getItem("authToken");
   const { currentUser } = useContext(AuthContext);
 
   const [data, setData] = useState([]);
 
-  const fetchData = async () => {
+  // FETCH DATA
+  const readAllData = async () => {
     try {
       if (currentUser) {
         const response = await fetch(
@@ -24,7 +25,6 @@ const TransactionsTrackedYearsPage = ({ page, type }) => {
         if (response.ok) {
           const allData = await response.json();
           setData(allData);
-          console.log(allData);
         }
       }
     } catch (error) {
@@ -32,15 +32,12 @@ const TransactionsTrackedYearsPage = ({ page, type }) => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [currentUser]);
-
+  // FILTER DATA BY YEARS
   const filterYears = () => {
     let yearsArray = [];
     const typeUpperCase = type.charAt(0).toUpperCase() + type.slice(1);
 
-    data.forEach((oneData) => {
+    data.map((oneData) => {
       if (
         !yearsArray.includes(oneData.year) &&
         oneData.type === typeUpperCase
@@ -53,19 +50,22 @@ const TransactionsTrackedYearsPage = ({ page, type }) => {
     return yearsArray;
   };
 
+  // USE EFFECT
+  useEffect(() => {
+    readAllData();
+  }, [currentUser]);
+
   return (
     <div className="container">
-      {filterYears().map((oneYear, index) => {
-        return (
-          <div key={index}>
-            <Link to={`/${page}/${type}/${oneYear}`}>
-              <p>{oneYear}</p>
-            </Link>
-          </div>
-        );
-      })}
+      {filterYears().map((oneYear, index) => (
+        <div key={index}>
+          <Link to={`/${page}/${type}/${oneYear}`}>
+            <p>{oneYear}</p>
+          </Link>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default TransactionsTrackedYearsPage;
+export default YearsPage;

@@ -4,9 +4,9 @@ import HomePage from "./pages/home/HomePage";
 import SignupPage from "./pages/auths/SignupPage";
 import LoginPage from "./pages/auths/LoginPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
-import YearsPage from "./pages/years/YearsPage";
-import OverviewMonthsPage from "./pages/overview/OverviewMonthsPage";
-import TransactionsMonthsPage from "./pages/transactions/TransactionsMonthsPage";
+import YearsPage from "./pages/overview/YearsPage";
+import OverviewMonthsPage from "./pages/overview/OverviewPage";
+import TransactionsPage from "./pages/transactions/TransactionsPage";
 import NavbarHorizontal from "./components/navbar/NavbarHorizontal";
 import NavbarVertical from "./components/navbar/NavbarVertical";
 
@@ -40,11 +40,11 @@ function App() {
         {/* OVERVIEW ROUTES */}
         <Route
           path="/overview/tracked"
-          element={<YearsPage page="overview" type="tracked" />}
+          element={<YearsPage page="overview" typeProp="tracked" />}
         />
         <Route
           path="/overview/planned"
-          element={<YearsPage page="overview" type="planned" />}
+          element={<YearsPage page="overview" typeProp="planned" />}
         />
         <Route
           path="/overview/tracked/:year"
@@ -57,20 +57,12 @@ function App() {
 
         {/* TRANSACTIONS ROUTES */}
         <Route
-          path="/transactions/tracked"
-          element={<YearsPage page="transactions" type="tracked" />}
+          path="/transactions/tracked/"
+          element={<TransactionsPage typeProp="tracked" />}
         />
         <Route
-          path="/transactions/planned"
-          element={<YearsPage page="transactions" type="planned" />}
-        />
-        <Route
-          path="/transactions/tracked/:year"
-          element={<TransactionsMonthsPage />}
-        />
-        <Route
-          path="/transactions/planned/:year"
-          element={<TransactionsMonthsPage />}
+          path="/transactions/planned/"
+          element={<TransactionsPage typeProp="planned" />}
         />
       </Routes>
     </div>
