@@ -32,7 +32,7 @@ const LoginPage = () => {
       if (response.status === 200) {
         const parsed = await response.json();
         handleLogin(parsed.token);
-        navigate(`/`);
+        navigate(`/dashboard`);
       }
     } catch (error) {
       console.log(error);

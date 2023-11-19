@@ -22,10 +22,8 @@ const NavbarVertical = () => {
     useState(false);
   const [transactionsDropdownRotation, setTransactionsDropdownRotation] =
     useState(false);
-    const [transactionsDropdownRotated, setTransactionsDropdownRotated] =
-  useState(false);
 
-
+  // HANDLE DROPDOWN TOGGLE
   const handleOverviewDropdownToggle = () => {
     setOverviewDropdown(!overviewDropdown);
     setOverviewDropdownRotation(!overviewDropdownRotation);
@@ -36,6 +34,7 @@ const NavbarVertical = () => {
     setTransactionsDropdownRotation(!transactionsDropdownRotation);
   };
 
+  // HANDLE ACTIVE PAGES
   const handleOverviewSelection = (option) => {
     setSelectedOverview(option);
     setOverviewDropdown(false);
@@ -46,7 +45,11 @@ const NavbarVertical = () => {
     setTransactionsDropdown(false);
   };
 
-  // HANDLERS
+  const handleHomeClick = () => {
+    setActiveLink("");
+  };
+
+  // HANDLE NAVBAR OPEN/CLOSE
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -57,10 +60,6 @@ const NavbarVertical = () => {
     setTransactionsDropdown(false);
     setOverviewDropdownRotation(false);
     setTransactionsDropdownRotation(false);
-  };
-
-  const handleHomeClick = () => {
-    setActiveLink("");
   };
 
   // USE EFFECTS

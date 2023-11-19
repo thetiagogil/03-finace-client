@@ -1,14 +1,15 @@
-import "./forms/CreateDataForm.css";
+import "./forms/DataForm.css";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import DataBox from "./DataBox";
-import CreateDataForm from "./forms/CreateDataForm";
+import DataBox from "./components/DataBox";
+import DataFormCreate from "./forms/DataFormCreate";
 
 const TransactionsPage = ({ typeProp }) => {
   const token = localStorage.getItem("authToken");
   const { currentUser } = useContext(AuthContext);
 
   const [data, setData] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(0);
 
   const [isFormVisible, setFormVisibility] = useState(false);
 
@@ -36,14 +37,35 @@ const TransactionsPage = ({ typeProp }) => {
     }
   };
 
-  // FILTER DATA BY TYPE
-  const filterByType = () => {
+  // FILTER DATA
+  const dataFiltered = () => {
+    const type = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
+    const year = parseInt(selectedYear);
+
+    const filteredData = data.filter(
+      (element) => element.type === type && (!year || element.year === year)
+    );
+
+    return filteredData;
+  };
+
+  // FILTER DATA BY YEARS
+  const filterByYears = () => {
+    let yearsArray = [];
     const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
-    const dataFilteredByType = data.filter((element) => {
-      return element.type === typeUpperCase;
+
+    data.map((oneData) => {
+      if (
+        !yearsArray.includes(oneData.year) &&
+        oneData.type === typeUpperCase
+      ) {
+        yearsArray.push(oneData.year);
+      }
     });
 
-    return dataFilteredByType;
+    yearsArray.sort();
+
+    return yearsArray;
   };
 
   // CREATE NEW DATA FORM VISIBILITY
@@ -55,19 +77,31 @@ const TransactionsPage = ({ typeProp }) => {
     setFormVisibility(false);
   };
 
-  // USE EFFECT
+  // EFFECT TO FETCH DATA
   useEffect(() => {
     readAllData();
   }, [currentUser]);
 
   return (
     <div className="container">
+      <select
+        onChange={(event) => setSelectedYear(event.target.value)}
+        value={selectedYear}
+      >
+        <option value="">Select an year</option>
+        {filterByYears().map((year) => (
+          <option key={year} value={year}>
+            {year}
+          </option>
+        ))}
+      </select>
+
       <button onClick={handleShowForm}>Create New Data</button>
 
       {isFormVisible && (
-        <div className="create-data-form-overlay">
-          <div className="create-data-form">
-            <CreateDataForm typeProp={typeProp} />
+        <div className="data-form-overlay">
+          <div className="data-form">
+            <DataFormCreate data={data} typeProp={typeProp} />
             <button onClick={handleCloseForm}>Close</button>
           </div>
         </div>
@@ -81,17 +115,18 @@ const TransactionsPage = ({ typeProp }) => {
             <th>Type</th>
             <th>Category</th>
             <th>SubCategory</th>
-            <th>Value</th>
+            <th>Amount</th>
           </tr>
         </thead>
 
         <tbody>
-          {filterByType().map((oneData, index) => (
+          {dataFiltered().map((oneData, index) => (
             <tr key={index}>
               <DataBox
                 key={index}
                 oneData={oneData}
                 readAllData={readAllData}
+                typeProp={typeProp}
               />
             </tr>
           ))}

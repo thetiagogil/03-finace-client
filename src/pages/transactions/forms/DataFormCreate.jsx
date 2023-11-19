@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 
-const CreateDataForm = ({ typeProp }) => {
+const DataFormCreate = ({ data, typeProp }) => {
   const token = localStorage.getItem("authToken");
   const { currentUser } = useContext(AuthContext);
 
@@ -41,11 +41,27 @@ const CreateDataForm = ({ typeProp }) => {
     }
   };
 
-  // FILTER CATEGORY
-  const filterCategory = () => {};
+  // CATEGORY ARRAY *this needs to be changed if new categories are added*
+  const categoriesArray = ["Income", "Expense"];
+
+  // MONTHS ARRAY
+  const monthsArray = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   return (
-    <form onSubmit={createData} className="create-data-form-content">
+    <form className="data-form-content">
       <div>
         <h2>Create Data</h2>
       </div>
@@ -53,11 +69,18 @@ const CreateDataForm = ({ typeProp }) => {
       <div>
         <label>
           <p>Category:</p>
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(event) => setCategory(event.target.value)}
-          />
+            required
+          >
+            <option value="">Select a category</option>
+            {categoriesArray.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
         </label>
 
         <label>
@@ -67,6 +90,7 @@ const CreateDataForm = ({ typeProp }) => {
             value={subCategory}
             onChange={(event) => setSubCategory(event.target.value)}
             placeholder="subcategory"
+            required
           />
         </label>
 
@@ -76,6 +100,7 @@ const CreateDataForm = ({ typeProp }) => {
             type="number"
             value={value}
             onChange={(event) => setValue(event.target.value)}
+            required
           />
         </label>
 
@@ -85,24 +110,39 @@ const CreateDataForm = ({ typeProp }) => {
             type="number"
             value={year}
             onChange={(event) => setYear(event.target.value)}
+            required
           />
         </label>
 
         <label>
           <p>Month:</p>
-          <input
-            type="text"
+          <select
             value={month}
             onChange={(event) => setMonth(event.target.value)}
-          />
+            required
+          >
+            <option value="">Select a month</option>
+            {monthsArray.map((month) => (
+              <option key={month} value={month}>
+                {month}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
 
       <div>
-        <button type="submit">Create</button>
+        <button
+          type="submit"
+          onClick={() => {
+            createData();
+          }}
+        >
+          Create
+        </button>
       </div>
     </form>
   );
 };
 
-export default CreateDataForm;
+export default DataFormCreate;

@@ -33,7 +33,7 @@ const YearsPage = ({ pageProp, typeProp }) => {
   };
 
   // FILTER DATA BY YEARS
-  const filterYears = () => {
+  const filterByYears = () => {
     let yearsArray = [];
     const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
 
@@ -57,7 +57,7 @@ const YearsPage = ({ pageProp, typeProp }) => {
 
   return (
     <div className="container">
-      {filterYears().map((oneYear, index) => (
+      {filterByYears().map((oneYear, index) => (
         <div key={index}>
           <Link to={`/${pageProp}/${typeProp}/${oneYear}`}>
             <p>{oneYear}</p>
