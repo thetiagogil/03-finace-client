@@ -27,22 +27,22 @@ const CreateDataForm = ({ typeProp }) => {
   const createData = async () => {
     try {
       if (currentUser) {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/data`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(payload),
-          }
-        );
+        await fetch(`${import.meta.env.VITE_API_URL}/api/data`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(payload),
+        });
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  // FILTER CATEGORY
+  const filterCategory = () => {};
 
   return (
     <form onSubmit={createData} className="create-data-form-content">
@@ -66,6 +66,7 @@ const CreateDataForm = ({ typeProp }) => {
             type="text"
             value={subCategory}
             onChange={(event) => setSubCategory(event.target.value)}
+            placeholder="subcategory"
           />
         </label>
 
