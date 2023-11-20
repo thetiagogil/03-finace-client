@@ -1,0 +1,16 @@
+.tran-table {
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tran-table th,
+.tran-table td {
+  width: 5rem;
+  font-size: 0.8rem;
+  padding: 0.3rem;
+  text-align: left;
+}
+
+.tran-table td {
+  border-top: 1px solid #ddd;
+}

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 
-const DataFormCreate = ({ data, typeProp }) => {
+const DataFormCreate = ({ typeProp }) => {
   const token = localStorage.getItem("authToken");
   const { currentUser } = useContext(AuthContext);
 

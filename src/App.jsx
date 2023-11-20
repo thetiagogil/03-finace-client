@@ -5,7 +5,7 @@ import SignupPage from "./pages/auths/SignupPage";
 import LoginPage from "./pages/auths/LoginPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import YearsPage from "./pages/overview/YearsPage";
-import OverviewMonthsPage from "./pages/overview/OverviewPage";
+import MonthsPage from "./pages/overview/MonthsPage";
 import TransactionsPage from "./pages/transactions/TransactionsPage";
 import NavbarHorizontal from "./components/navbar/NavbarHorizontal";
 import NavbarVertical from "./components/navbar/NavbarVertical";
@@ -48,11 +48,11 @@ function App() {
         />
         <Route
           path="/overview/tracked/:year"
-          element={<OverviewMonthsPage />}
+          element={<MonthsPage />}
         />
         <Route
           path="/overview/planned/:year"
-          element={<OverviewMonthsPage />}
+          element={<MonthsPage />}
         />
 
         {/* TRANSACTIONS ROUTES */}

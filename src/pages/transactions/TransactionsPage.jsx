@@ -1,3 +1,4 @@
+import "./TransactionsPage.css";
 import "./forms/DataForm.css";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -9,6 +10,7 @@ const TransactionsPage = ({ typeProp }) => {
   const { currentUser } = useContext(AuthContext);
 
   const [data, setData] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedYear, setSelectedYear] = useState(0);
 
   const [isFormVisible, setFormVisibility] = useState(false);
@@ -41,9 +43,13 @@ const TransactionsPage = ({ typeProp }) => {
   const dataFiltered = () => {
     const type = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
     const year = parseInt(selectedYear);
+    const category = selectedCategory;
 
     const filteredData = data.filter(
-      (element) => element.type === type && (!year || element.year === year)
+      (element) =>
+        (!type || element.type === type) &&
+        (!year || element.year === year) &&
+        (!category || element.category === category)
     );
 
     return filteredData;
@@ -68,6 +74,23 @@ const TransactionsPage = ({ typeProp }) => {
     return yearsArray;
   };
 
+  // FILTER DATA BY CATEGORY
+  const filterByCategory = () => {
+    let catArray = [];
+    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
+
+    data.map((oneData) => {
+      if (
+        !catArray.includes(oneData.category) &&
+        oneData.type === typeUpperCase
+      ) {
+        catArray.push(oneData.category);
+      }
+    });
+
+    return catArray;
+  };
+
   // CREATE NEW DATA FORM VISIBILITY
   const handleShowForm = () => {
     setFormVisibility(true);
@@ -84,6 +107,7 @@ const TransactionsPage = ({ typeProp }) => {
 
   return (
     <div className="container">
+      {/* SELECT FOR YEARS*/}
       <select
         onChange={(event) => setSelectedYear(event.target.value)}
         value={selectedYear}
@@ -96,6 +120,20 @@ const TransactionsPage = ({ typeProp }) => {
         ))}
       </select>
 
+      {/* SELECT FOR CATEGORY */}
+      <select
+        onChange={(event) => setSelectedCategory(event.target.value)}
+        value={selectedCategory}
+      >
+        <option value="">Select a category</option>
+        {filterByCategory().map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
+      </select>
+
+      {/* CREATE DATA FORM */}
       <button onClick={handleShowForm}>Create New Data</button>
 
       {isFormVisible && (
@@ -107,7 +145,8 @@ const TransactionsPage = ({ typeProp }) => {
         </div>
       )}
 
-      <table>
+      {/* DATA TABLE */}
+      <table className="tran-table">
         <thead>
           <tr>
             <th>Month</th>
