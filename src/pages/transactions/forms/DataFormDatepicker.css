@@ -1,0 +1,42 @@
+/* CSS CREATE FOR THE DATE PICKER CALENDAR */
+.react-datepicker {
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+}
+
+.react-datepicker__header {
+  background-color: rgb(35, 45, 55);
+  color: #fff;
+  border-bottom: none;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
+  width: 2rem;
+  line-height: 2rem;
+  margin: 0.2rem;
+  border-radius: 4px;
+}
+
+.react-datepicker__day-name {
+  color: #fff; /* Set week day text color to white */
+}
+
+.react-datepicker__day--selected {
+  background-color: rgb(35, 45, 55);
+  color: #fff;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: rgb(35, 45, 55);
+  color: #fff;
+}
+
+/* Optional: Add hover effect */
+.react-datepicker__day:hover {
+  background-color: #e0e0e0;
+  color: #000;
+}

@@ -1,4 +1,3 @@
-import "./datepicker.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import ReactDatePicker from "react-datepicker";

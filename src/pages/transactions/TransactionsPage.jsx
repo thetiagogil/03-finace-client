@@ -1,6 +1,7 @@
 import "./TransactionsPage.css";
 import "./forms/DataForm.css";
 import "react-datepicker/dist/react-datepicker.css";
+import "./forms/DataFormDatepicker.css";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import DataBox from "./components/DataBox";
@@ -16,6 +17,7 @@ const TransactionsPage = ({ typeProp }) => {
   const [selectedMonth, setSelectedMonth] = useState("");
 
   const [isFormVisible, setFormVisibility] = useState(false);
+  const [hasData, setHasData] = useState(false);
 
   // READ DATA
   const readAllData = async () => {
@@ -34,6 +36,7 @@ const TransactionsPage = ({ typeProp }) => {
         if (response.ok) {
           const allData = await response.json();
           setData(allData);
+          setHasData(allData.length > 0);
         }
       }
     } catch (error) {
@@ -122,6 +125,11 @@ const TransactionsPage = ({ typeProp }) => {
     setFormVisibility(false);
   };
 
+  // HANDLE IF HAS DATA
+  const handleHasData = () => {
+    return data.length > 0;
+  };
+
   // EFFECT TO FETCH DATA
   useEffect(() => {
     readAllData();
@@ -183,30 +191,40 @@ const TransactionsPage = ({ typeProp }) => {
       )}
 
       {/* DATA TABLE */}
-      <table className="tran-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Category</th>
-            <th>SubCategory</th>
-            <th>Value</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {dataFiltered().map((oneData, index) => (
-            <tr key={index}>
-              <DataBox
-                key={index}
-                oneData={oneData}
-                readAllData={readAllData}
-                typeProp={typeProp}
-              />
+      {!handleHasData() && (
+        <p className="tran-table-noData">there is no data created</p>
+      )}
+      {handleHasData() && !dataFiltered().length > 0 && (
+        <p className="tran-table-noData">there is no matching data</p>
+      )}
+      {handleHasData() && dataFiltered().length > 0 && (
+        <table className="tran-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>SubCategory</th>
+              <th>Value</th>
+              <th>Description</th>
+              <th></th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {dataFiltered().map((oneData, index) => (
+              <tr key={index}>
+                <DataBox
+                  key={index}
+                  oneData={oneData}
+                  readAllData={readAllData}
+                  typeProp={typeProp}
+                />
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
