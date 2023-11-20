@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
-import ReactDatePicker from "react-datepicker";
+import DataFormText from "./DataFormText";
 
-const DataFormUpdate = ({ oneData, typeProp }) => {
+const DataFormUpdate = ({ oneData, typeProp, handleCloseForm }) => {
   const token = localStorage.getItem("authToken");
   const { currentUser } = useContext(AuthContext);
 
@@ -12,6 +12,7 @@ const DataFormUpdate = ({ oneData, typeProp }) => {
     oneData.subCategory
   );
   const [updatedValue, setUpdatedValue] = useState(oneData.value);
+  const [updatedCurrency, setUpdatedCurrency] = useState(oneData.currency);
   const [updatedDate, setUpdatedDate] = useState(new Date(oneData.date));
   const [updatedDescription, setUpdatedDescription] = useState(
     oneData.description
@@ -26,6 +27,7 @@ const DataFormUpdate = ({ oneData, typeProp }) => {
     category: updatedCategory,
     subCategory: updatedSubCategory,
     value: updatedValue,
+    currency: updatedCurrency,
     date: updatedDate,
     description: updatedDescription,
     user: `${currentUser}`,
@@ -55,82 +57,22 @@ const DataFormUpdate = ({ oneData, typeProp }) => {
     }
   };
 
-  // CATEGORY ARRAY *this needs to be changed if new categories are added*
-  const categoriesArray = ["Income", "Expense"];
-
-  return (
-    <form className="data-form-content">
-      <div>
-        <h2>Update Data</h2>
-      </div>
-
-      <div>
-        <label>
-          <p>Date:</p>
-          <ReactDatePicker
-            selected={new Date(updatedDate)}
-            onChange={(date) => setUpdatedDate(date)}
-            required
-          />
-        </label>
-
-        <label>
-          <p>Category:</p>
-          <select
-            value={updatedCategory}
-            onChange={(event) => setUpdatedCategory(event.target.value)}
-            required
-          >
-            <option value="">Select an item</option>
-            {categoriesArray.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label>
-          <p>Sub Category:</p>
-          <input
-            type="text"
-            value={updatedSubCategory}
-            onChange={(event) => setUpdatedSubCategory(event.target.value)}
-            placeholder="subcategory"
-          />
-        </label>
-
-        <label>
-          <p>Value:</p>
-          <input
-            type="number"
-            value={updatedValue}
-            onChange={(event) => setUpdatedValue(event.target.value)}
-          />
-        </label>
-
-        <label>
-          <p>Description:</p>
-          <input
-            type="text"
-            value={updatedDescription}
-            onChange={(event) => setUpdatedDescription(event.target.value)}
-          />
-        </label>
-      </div>
-
-      <div>
-        <button
-          type="submit"
-          onClick={() => {
-            updateData(oneData);
-          }}
-          className="data-form-button-create"
-        >
-          Update
-        </button>
-      </div>
-    </form>
+  return (<DataFormText
+    formType="Update"
+    handleCloseForm={handleCloseForm}
+    category={updatedCategory}
+    subCategory={updatedSubCategory}
+    value={updatedValue}
+    currency={updatedCurrency}
+    date={updatedDate}
+    description={updatedDescription}
+    setCategory={setUpdatedCategory}
+    setSubCategory={setUpdatedSubCategory}
+    setValue={setUpdatedValue}
+    setCurrency={setUpdatedCurrency}
+    setDate={setUpdatedDate}
+    setDescription={setUpdatedDescription}
+    functionType={updateData} />
   );
 };
 

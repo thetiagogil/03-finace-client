@@ -2,6 +2,7 @@ import "./TransactionsPage.css";
 import "./forms/DataForm.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "./forms/DataFormDatepicker.css";
+import crossIcon from "../../assets/icon-plus.png";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import DataBox from "./components/DataBox";
@@ -125,10 +126,13 @@ const TransactionsPage = ({ typeProp }) => {
     setFormVisibility(false);
   };
 
-  // HANDLE IF HAS DATA
-  const handleHasData = () => {
+  // HANDLE IF DATA EXISTS
+  const handleDataExists = () => {
     return data.length > 0;
   };
+
+  // TRANSFORM DATE TO DECENT FORMAT
+  const date = new Date().toLocaleDateString();
 
   // EFFECT TO FETCH DATA
   useEffect(() => {
@@ -137,94 +141,115 @@ const TransactionsPage = ({ typeProp }) => {
 
   return (
     <div className="container">
-      {/* SELECT FOR YEARS*/}
-      <select
-        onChange={(event) => setSelectedYear(event.target.value)}
-        value={selectedYear}
-      >
-        <option value="">Select an year</option>
-        {filterByYears().map((year) => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
+      <div>
+        <section>
+          <p>Date of today</p>
+          <p>{date}</p>
+        </section>
+      </div>
 
-      {/* SELECT FOR MONTH */}
-      <select
-        onChange={(event) => setSelectedMonth(event.target.value)}
-        value={selectedMonth}
-      >
-        <option value="">Select a month</option>
-        {monthsArray.map((month) => {
-          return (
-            <option key={month} value={month}>
-              {month}
-            </option>
-          );
-        })}
-      </select>
-
-      {/* SELECT FOR CATEGORY */}
-      <select
-        onChange={(event) => setSelectedCategory(event.target.value)}
-        value={selectedCategory}
-      >
-        <option value="">Select a category</option>
-        {filterByCategory().map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
-
-      {/* CREATE DATA FORM */}
-      <button onClick={handleShowForm}>Create New Data</button>
-
-      {isFormVisible && (
-        <div className="data-form-overlay">
-          <div className="data-form">
-            <DataFormCreate data={data} typeProp={typeProp} />
-            <button onClick={handleCloseForm}>Close</button>
-          </div>
-        </div>
-      )}
-
-      {/* DATA TABLE */}
-      {!handleHasData() && (
-        <p className="tran-table-noData">there is no data created</p>
-      )}
-      {handleHasData() && !dataFiltered().length > 0 && (
-        <p className="tran-table-noData">there is no matching data</p>
-      )}
-      {handleHasData() && dataFiltered().length > 0 && (
-        <table className="tran-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Category</th>
-              <th>SubCategory</th>
-              <th>Value</th>
-              <th>Description</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {dataFiltered().map((oneData, index) => (
-              <tr key={index}>
-                <DataBox
-                  key={index}
-                  oneData={oneData}
-                  readAllData={readAllData}
-                  typeProp={typeProp}
-                />
-              </tr>
+      <div className="tran-box-dataManage">
+        <section></section>
+        <section>
+          {/* SELECT FOR YEARS*/}
+          <select
+            onChange={(event) => setSelectedYear(event.target.value)}
+            value={selectedYear}
+          >
+            <option value="">Filter by year</option>
+            {filterByYears().map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
             ))}
-          </tbody>
-        </table>
-      )}
+          </select>
+
+          {/* SELECT FOR MONTH */}
+          <select
+            onChange={(event) => setSelectedMonth(event.target.value)}
+            value={selectedMonth}
+          >
+            <option value="">Filter by month</option>
+            {monthsArray.map((month) => {
+              return (
+                <option key={month} value={month}>
+                  {month}
+                </option>
+              );
+            })}
+          </select>
+
+          {/* SELECT FOR CATEGORY */}
+          <select
+            onChange={(event) => setSelectedCategory(event.target.value)}
+            value={selectedCategory}
+          >
+            <option value="">Filter by category</option>
+            {filterByCategory().map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </section>
+
+        {/* CREATE DATA FORM */}
+        <section>
+          <button onClick={handleShowForm}>
+            <img src={crossIcon} />
+          </button>
+        </section>
+      </div>
+
+      <div>
+        {isFormVisible && (
+          <div className="data-form-overlay">
+            <DataFormCreate
+              data={data}
+              typeProp={typeProp}
+              handleCloseForm={handleCloseForm}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="tran-table-container">
+        {/* DATA TABLE */}
+        {!handleDataExists() && (
+          <p className="tran-table-noData">there is no data created</p>
+        )}
+        {handleDataExists() && !dataFiltered().length > 0 && (
+          <p className="tran-table-noData">there is no matching data</p>
+        )}
+        {handleDataExists() && dataFiltered().length > 0 && (
+          <table className="tran-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>SubCategory</th>
+                <th>Value</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {dataFiltered().map((oneData, index) => (
+                <tr key={index}>
+                  <DataBox
+                    key={index}
+                    oneData={oneData}
+                    readAllData={readAllData}
+                    typeProp={typeProp}
+                  />
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 };

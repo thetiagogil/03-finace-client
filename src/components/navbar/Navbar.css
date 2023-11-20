@@ -123,6 +123,7 @@
 
 /* HORIZONTAL NAVBAR */
 .hNavbar {
+  background-color: rgb(240, 240, 245);
   height: 4rem;
   width: 100vw;
   position: fixed;

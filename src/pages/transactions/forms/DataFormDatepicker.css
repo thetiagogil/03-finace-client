@@ -22,7 +22,7 @@
 }
 
 .react-datepicker__day-name {
-  color: #fff; /* Set week day text color to white */
+  color: #fff;
 }
 
 .react-datepicker__day--selected {
@@ -35,7 +35,6 @@
   color: #fff;
 }
 
-/* Optional: Add hover effect */
 .react-datepicker__day:hover {
   background-color: #e0e0e0;
   color: #000;

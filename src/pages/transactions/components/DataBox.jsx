@@ -1,3 +1,5 @@
+import editIcon from "../../../assets/icon-edit.png";
+import trashIcon from "../../../assets/icon-trash.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import DataFormUpdate from "../forms/DataFormUpdate";
@@ -40,7 +42,7 @@ const DataBox = ({ oneData, readAllData, typeProp }) => {
     setFormVisibility(false);
   };
 
-  // TRANSFOR DATE TO DECENT FORMAT
+  // TRANSFORM DATE TO DECENT FORMAT
   const date = new Date(oneData.date).toLocaleDateString();
 
   return (
@@ -48,22 +50,15 @@ const DataBox = ({ oneData, readAllData, typeProp }) => {
       <td>{date}</td>
       <td>{oneData.category}</td>
       <td>{oneData.subCategory}</td>
-      <td>{oneData.value}</td>
+      <td>
+        {oneData.value} {oneData.currency}
+      </td>
       <td>{oneData.description}</td>
 
       <td>
         <button type="button" onClick={handleShowForm}>
-          <p>u</p>
+          <img src={editIcon} />
         </button>
-
-        {isFormVisible && (
-          <div className="data-form-overlay">
-            <div className="data-form">
-              <DataFormUpdate oneData={oneData} typeProp={typeProp} />
-              <button onClick={handleCloseForm}>Close</button>
-            </div>
-          </div>
-        )}
       </td>
 
       <td>
@@ -73,9 +68,19 @@ const DataBox = ({ oneData, readAllData, typeProp }) => {
             deleteData(oneData);
           }}
         >
-          <p>x</p>
+          <img src={trashIcon} />
         </button>
       </td>
+
+      {isFormVisible && (
+        <div className="data-form-overlay">
+          <DataFormUpdate
+            oneData={oneData}
+            typeProp={typeProp}
+            handleCloseForm={handleCloseForm}
+          />
+        </div>
+      )}
     </>
   );
 };

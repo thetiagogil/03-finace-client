@@ -1,3 +1,4 @@
+/* DATA FORM OVERLAY */
 .data-form-overlay {
   position: fixed;
   top: 0;
@@ -10,6 +11,7 @@
   align-items: center;
 }
 
+/* DATA FORM */
 .data-form {
   background-color: white;
   display: flex;
@@ -18,30 +20,101 @@
   justify-content: center;
   gap: 1rem;
   margin: 4rem;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 0.3rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.data-form label input {
-  background-color: rgb(240, 240, 245);
-  color: rgb(35, 45, 55);
-  height: 2rem;
-  font-size: 0.9rem;
-  border: none;
-  outline: none;
-  border-radius: 0.3rem;
-  padding-left: 1rem;
+/* DATA FORM - HEADER */
+.data-form-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.data-form-header button {
+  background-color: transparent;
+  height: 1.7rem;
+  width: 1.7rem;
+  padding: 0.4rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  position: relative;
+  transition-duration: 0.5s;
+}
+
+.data-form-header button:hover {
+  transform: rotate(180deg);
+}
+
+.data-form-header img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* DATA FORM - CONTENT */
 .data-form-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: 1rem;
 }
 
-.data-form-button-create {
+.data-form-content-div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.data-form-content p {
+  margin: 0 0 0.3rem 0.3rem;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.data-form-content label select,
+.data-form-content label input,
+.data-form-content label textarea {
+  background-color: rgb(245, 245, 245);
+  height: 2rem;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  border: none;
+  outline: none;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  appearance: none;
+}
+.data-form-content label input[type="number"]::-webkit-inner-spin-button,
+.data-form-content label input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.data-form-content div:nth-child(1) select {
+  width: 7rem;
+}
+
+.data-form-content div:nth-child(1) input {
+  width: 14.5rem;
+}
+
+.data-form-content div:nth-child(2) date,
+.data-form-content div:nth-child(2) input,
+.data-form-content div:nth-child(2) select {
+  width: 7rem;
+}
+
+.data-form-content div:nth-child(3) textarea {
+  height: 5rem;
+  width: 22rem;
+  resize: none;
+  font-family: "Calibri";
+}
+
+.data-form-content div:nth-child(4) button {
   background-color: rgb(35, 45, 55, 0.7);
   color: white;
   width: 5rem;
@@ -52,7 +125,19 @@
   transition-duration: 0.5s;
 }
 
-.data-form-button-create:hover {
-  background-color: rgb(35, 45, 55, 0.9);
+/* DATA FORM - BUTTON */
+.data-form-button {
+  background-color: rgb(35, 45, 55);
+  color: white;
+  border: none;
+  width: 4.5rem;
+  margin-right: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  transition-duration: 0.5s;
+}
+
+.data-form-button:hover {
+  background-color: rgb(35, 45, 55, 0.75);
   border-radius: 0rem;
 }

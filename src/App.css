@@ -27,7 +27,7 @@ p {
 }
 
 .container {
-  margin: 4rem 0 0 4rem;
+  margin: 4rem 0 0 4.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
