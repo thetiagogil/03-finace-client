@@ -1,5 +1,7 @@
+import "./datepicker.css"
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
+import ReactDatePicker from "react-datepicker";
 
 const DataFormUpdate = ({ oneData, typeProp }) => {
   const token = localStorage.getItem("authToken");
@@ -11,8 +13,12 @@ const DataFormUpdate = ({ oneData, typeProp }) => {
     oneData.subCategory
   );
   const [updatedValue, setUpdatedValue] = useState(oneData.value);
-  const [updatedYear, setUpdatedYear] = useState(oneData.year);
-  const [updatedMonth, setUpdatedMonth] = useState(oneData.month);
+  const [updatedDate, setUpdatedDate] = useState(new Date(oneData.date));
+  const [updatedDescription, setUpdatedDescription] = useState(
+    oneData.description
+  );
+
+  console.log("oneData.date:", oneData.date);
 
   const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
 
@@ -21,8 +27,8 @@ const DataFormUpdate = ({ oneData, typeProp }) => {
     category: updatedCategory,
     subCategory: updatedSubCategory,
     value: updatedValue,
-    year: updatedYear,
-    month: updatedMonth,
+    date: updatedDate,
+    description: updatedDescription,
     user: `${currentUser}`,
   };
 
@@ -53,22 +59,6 @@ const DataFormUpdate = ({ oneData, typeProp }) => {
   // CATEGORY ARRAY *this needs to be changed if new categories are added*
   const categoriesArray = ["Income", "Expense"];
 
-  // MONTHS ARRAY
-  const monthsArray = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
   return (
     <form className="data-form-content">
       <div>
@@ -76,6 +66,15 @@ const DataFormUpdate = ({ oneData, typeProp }) => {
       </div>
 
       <div>
+        <label>
+          <p>Date:</p>
+          <ReactDatePicker
+            selected={new Date(updatedDate)}
+            onChange={(date) => setUpdatedDate(date)}
+            required
+          />
+        </label>
+
         <label>
           <p>Category:</p>
           <select
@@ -112,29 +111,13 @@ const DataFormUpdate = ({ oneData, typeProp }) => {
         </label>
 
         <label>
-          <p>Year:</p>
+          <p>Description:</p>
           <input
-            type="number"
-            value={updatedYear}
-            onChange={(event) => setUpdatedYear(event.target.value)}
+            type="text"
+            value={updatedDescription}
+            onChange={(event) => setUpdatedDescription(event.target.value)}
           />
         </label>
-
-        <label>
-          <p>Month:</p>
-          <select
-            value={updatedMonth}
-            onChange={(event) => setUpdatedMonth(event.target.value)}
-            required
-          >
-            <option value="">Select an item</option>
-            {monthsArray.map((month) => (
-              <option key={month} value={month}>
-                {month}
-              </option>
-            ))}
-          </select>
-          </label>
       </div>
 
       <div>
@@ -143,6 +126,7 @@ const DataFormUpdate = ({ oneData, typeProp }) => {
           onClick={() => {
             updateData(oneData);
           }}
+          className="data-form-button-create"
         >
           Update
         </button>

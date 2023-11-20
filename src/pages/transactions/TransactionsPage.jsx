@@ -1,5 +1,6 @@
 import "./TransactionsPage.css";
 import "./forms/DataForm.css";
+import "react-datepicker/dist/react-datepicker.css";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import DataBox from "./components/DataBox";
@@ -12,6 +13,7 @@ const TransactionsPage = ({ typeProp }) => {
   const [data, setData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedYear, setSelectedYear] = useState(0);
+  const [selectedMonth, setSelectedMonth] = useState("");
 
   const [isFormVisible, setFormVisibility] = useState(false);
 
@@ -42,36 +44,23 @@ const TransactionsPage = ({ typeProp }) => {
   // FILTER DATA
   const dataFiltered = () => {
     const type = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
-    const year = parseInt(selectedYear);
     const category = selectedCategory;
+    const year = parseInt(selectedYear);
+    const month = selectedMonth;
 
-    const filteredData = data.filter(
-      (element) =>
+    const filteredData = data.filter((element) => {
+      const elementYear = new Date(element.date).getFullYear();
+      const elementMonth = monthsArray[new Date(element.date).getMonth()];
+
+      return (
         (!type || element.type === type) &&
-        (!year || element.year === year) &&
-        (!category || element.category === category)
-    );
-
-    return filteredData;
-  };
-
-  // FILTER DATA BY YEARS
-  const filterByYears = () => {
-    let yearsArray = [];
-    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
-
-    data.map((oneData) => {
-      if (
-        !yearsArray.includes(oneData.year) &&
-        oneData.type === typeUpperCase
-      ) {
-        yearsArray.push(oneData.year);
-      }
+        (!category || element.category === category) &&
+        (!year || elementYear === year) &&
+        (!month || elementMonth === month)
+      );
     });
 
-    yearsArray.sort();
-
-    return yearsArray;
+    return filteredData;
   };
 
   // FILTER DATA BY CATEGORY
@@ -90,6 +79,39 @@ const TransactionsPage = ({ typeProp }) => {
 
     return catArray;
   };
+
+  // FILTER DATA BY YEARS
+  const filterByYears = () => {
+    let yearsArray = [];
+    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
+
+    data.map((oneData) => {
+      const year = new Date(oneData.date).getFullYear();
+      if (!yearsArray.includes(year) && oneData.type === typeUpperCase) {
+        yearsArray.push(year);
+      }
+    });
+
+    yearsArray.sort();
+
+    return yearsArray;
+  };
+
+  // FILTER DATA BY MONTHS
+  const monthsArray = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   // CREATE NEW DATA FORM VISIBILITY
   const handleShowForm = () => {
@@ -118,6 +140,21 @@ const TransactionsPage = ({ typeProp }) => {
             {year}
           </option>
         ))}
+      </select>
+
+      {/* SELECT FOR MONTH */}
+      <select
+        onChange={(event) => setSelectedMonth(event.target.value)}
+        value={selectedMonth}
+      >
+        <option value="">Select a month</option>
+        {monthsArray.map((month) => {
+          return (
+            <option key={month} value={month}>
+              {month}
+            </option>
+          );
+        })}
       </select>
 
       {/* SELECT FOR CATEGORY */}
@@ -149,12 +186,11 @@ const TransactionsPage = ({ typeProp }) => {
       <table className="tran-table">
         <thead>
           <tr>
-            <th>Month</th>
-            <th>Year</th>
-            <th>Type</th>
+            <th>Date</th>
             <th>Category</th>
             <th>SubCategory</th>
-            <th>Amount</th>
+            <th>Value</th>
+            <th>Description</th>
           </tr>
         </thead>
 

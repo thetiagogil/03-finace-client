@@ -1,5 +1,7 @@
+import "./datepicker.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
+import ReactDatePicker from "react-datepicker";
 
 const DataFormCreate = ({ typeProp }) => {
   const token = localStorage.getItem("authToken");
@@ -9,8 +11,8 @@ const DataFormCreate = ({ typeProp }) => {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [value, setValue] = useState(0);
-  const [year, setYear] = useState(0);
-  const [month, setMonth] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [description, setDescription] = useState("");
 
   const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
 
@@ -19,8 +21,8 @@ const DataFormCreate = ({ typeProp }) => {
     category,
     subCategory,
     value,
-    year,
-    month,
+    date,
+    description,
     user: `${currentUser}`,
   };
 
@@ -41,24 +43,23 @@ const DataFormCreate = ({ typeProp }) => {
     }
   };
 
-  // CATEGORY ARRAY *this needs to be changed if new categories are added*
-  const categoriesArray = ["Income", "Expense"];
+  // DATE FORMATATION
+  const formatDate = (date) => {
+    // ENSURE THE DATE INPUT IS VALID
+    if (!(date instanceof Date)) {
+      date = new Date(date);
+    }
 
-  // MONTHS ARRAY
-  const monthsArray = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+    // FORMAT DATE AS "YYYY-MM-DD"
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
+  // CATEGORY ARRAY
+  const categoriesArray = ["Income", "Expense"];
 
   return (
     <form className="data-form-content">
@@ -67,6 +68,15 @@ const DataFormCreate = ({ typeProp }) => {
       </div>
 
       <div>
+        <label>
+          <p>Date:</p>
+          <ReactDatePicker
+            selected={new Date(date)}
+            onChange={(date) => setDate(date)}
+            required
+          />
+        </label>
+
         <label>
           <p>Category:</p>
           <select
@@ -105,29 +115,12 @@ const DataFormCreate = ({ typeProp }) => {
         </label>
 
         <label>
-          <p>Year:</p>
+          <p>Description:</p>
           <input
-            type="number"
-            value={year}
-            onChange={(event) => setYear(event.target.value)}
-            required
+            type="text"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
           />
-        </label>
-
-        <label>
-          <p>Month:</p>
-          <select
-            value={month}
-            onChange={(event) => setMonth(event.target.value)}
-            required
-          >
-            <option value="">Select a month</option>
-            {monthsArray.map((month) => (
-              <option key={month} value={month}>
-                {month}
-              </option>
-            ))}
-          </select>
         </label>
       </div>
 
@@ -137,6 +130,7 @@ const DataFormCreate = ({ typeProp }) => {
           onClick={() => {
             createData();
           }}
+          className="data-form-button-create"
         >
           Create
         </button>

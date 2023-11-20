@@ -40,14 +40,16 @@ const DataBox = ({ oneData, readAllData, typeProp }) => {
     setFormVisibility(false);
   };
 
+  // TRANSFOR DATE TO DECENT FORMAT
+  const date = new Date(oneData.date).toLocaleDateString();
+
   return (
     <>
-      <td>{oneData.month}</td>
-      <td>{oneData.year}</td>
-      <td>{oneData.type}</td>
+      <td>{date}</td>
       <td>{oneData.category}</td>
       <td>{oneData.subCategory}</td>
       <td>{oneData.value}</td>
+      <td>{oneData.description}</td>
 
       <td>
         <button type="button" onClick={handleShowForm}>
