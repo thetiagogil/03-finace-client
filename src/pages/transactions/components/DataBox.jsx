@@ -51,7 +51,7 @@ const DataBox = ({ oneData, readAllData, typeProp }) => {
       <td>{oneData.category}</td>
       <td>{oneData.subCategory}</td>
       <td>
-        {oneData.value} {oneData.currency}
+        {oneData.value.toFixed(2)} {oneData.currency}
       </td>
       <td>{oneData.description}</td>
 

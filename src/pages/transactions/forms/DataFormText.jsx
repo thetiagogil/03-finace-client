@@ -60,6 +60,7 @@ const DataForm = ({
               value={subCategory}
               onChange={(event) => setSubCategory(event.target.value)}
               className="data-form-content-categories"
+              maxlength="16"
               required
             />
           </label>
@@ -78,12 +79,13 @@ const DataForm = ({
           <label>
             <p>Value:</p>
             <input
-              type="number"
+              type="text"
               value={value}
               onChange={(event) => {
-                const newValue = Math.max(0, event.target.value);
+                const newValue = event.target.value.replace(/[^0-9.]/g, '')
                 setValue(newValue);
               }}
+              maxlength="11"
               required
             />
           </label>

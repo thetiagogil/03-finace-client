@@ -13,9 +13,14 @@ const TransactionsPage = ({ typeProp }) => {
   const { currentUser } = useContext(AuthContext);
 
   const [data, setData] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+
   const [selectedYear, setSelectedYear] = useState(0);
   const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
+
+  const [sortOrderByDate, setSortOrderByDate] = useState("asc");
+  const [sortOrderByValue, setSortOrderByValue] = useState("asc");
 
   const [isFormVisible, setFormVisibility] = useState(false);
   const [hasData, setHasData] = useState(false);
@@ -48,9 +53,10 @@ const TransactionsPage = ({ typeProp }) => {
   // FILTER DATA
   const dataFiltered = () => {
     const type = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
-    const category = selectedCategory;
     const year = parseInt(selectedYear);
     const month = selectedMonth;
+    const category = selectedCategory;
+    const subCategory = selectedSubCategory;
 
     const filteredData = data.filter((element) => {
       const elementYear = new Date(element.date).getFullYear();
@@ -58,9 +64,10 @@ const TransactionsPage = ({ typeProp }) => {
 
       return (
         (!type || element.type === type) &&
-        (!category || element.category === category) &&
         (!year || elementYear === year) &&
-        (!month || elementMonth === month)
+        (!month || elementMonth === month) &&
+        (!category || element.category === category) &&
+        (!subCategory || element.subCategory === subCategory)
       );
     });
 
@@ -117,6 +124,49 @@ const TransactionsPage = ({ typeProp }) => {
     "December",
   ];
 
+  // FILTER DATA BY YEARS
+  const filterBySubCategory = () => {
+    let subCatArray = [];
+    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
+
+    data.map((oneData) => {
+      if (
+        !subCatArray.includes(oneData.subCategory) &&
+        oneData.type === typeUpperCase
+      ) {
+        subCatArray.push(oneData.subCategory);
+      }
+    });
+
+    return subCatArray;
+  };
+
+  // SORT DATA BY DATE
+  const sortByDate = () => {
+    const orderMultiplier = sortOrderByDate === "asc" ? 1 : -1;
+
+    const sortedData = [...dataFiltered()];
+    sortedData.sort((a, b) => {
+      return orderMultiplier * (new Date(a.date) - new Date(b.date));
+    });
+
+    setData(sortedData);
+    setSortOrderByDate(sortOrderByDate === "asc" ? "desc" : "asc");
+  };
+
+  // SORT DATA BY VALUE
+  const sortByValue = () => {
+    const orderMultiplier = sortOrderByValue === "asc" ? 1 : -1;
+
+    const sortedData = [...dataFiltered()];
+    sortedData.sort((a, b) => {
+      return orderMultiplier * (a.value - b.value);
+    });
+
+    setData(sortedData);
+    setSortOrderByValue(sortOrderByValue === "asc" ? "desc" : "asc");
+  };
+
   // CREATE NEW DATA FORM VISIBILITY
   const handleShowForm = () => {
     setFormVisibility(true);
@@ -141,14 +191,24 @@ const TransactionsPage = ({ typeProp }) => {
 
   return (
     <div className="container">
-      <div>
+      <div className="tran-box-info">
         <section>
           <p>Date of today</p>
           <p>{date}</p>
         </section>
+
+        <section>
+          <p>Date of today</p>
+          <p>{date}</p>
+        </section>
+
+        <section>
+          <p>Nº of {typeProp} data</p>
+          <p>{dataFiltered().length}</p>
+        </section>
       </div>
 
-      <div className="tran-box-dataManage">
+      <div className="tran-box-management">
         <section></section>
         <section>
           {/* SELECT FOR YEARS*/}
@@ -191,6 +251,19 @@ const TransactionsPage = ({ typeProp }) => {
               </option>
             ))}
           </select>
+
+          {/* SELECT FOR CATEGORY */}
+          <select
+            onChange={(event) => setSelectedSubCategory(event.target.value)}
+            value={selectedSubCategory}
+          >
+            <option value="">Filter by Sub Category</option>
+            {filterBySubCategory().map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
         </section>
 
         {/* CREATE DATA FORM */}
@@ -213,7 +286,7 @@ const TransactionsPage = ({ typeProp }) => {
         )}
       </div>
 
-      <div className="tran-table-container">
+      <div className="tran-box-table">
         {/* DATA TABLE */}
         {!handleDataExists() && (
           <p className="tran-table-noData">there is no data created</p>
@@ -225,10 +298,21 @@ const TransactionsPage = ({ typeProp }) => {
           <table className="tran-table">
             <thead>
               <tr>
-                <th>Date</th>
+                <th>
+                  Date{" "}
+                  <button onClick={sortByDate}>
+                    {sortOrderByDate === "asc" ? "▲" : "▼"}
+                  </button>
+                </th>
                 <th>Category</th>
-                <th>SubCategory</th>
-                <th>Value</th>
+                <th>Sub Category</th>
+                <th>
+                  Value{" "}
+                  <button onClick={sortByValue}>
+                    {sortOrderByValue === "asc" ? "▲" : "▼"}
+                  </button>
+                </th>
+
                 <th>Description</th>
                 <th></th>
                 <th></th>

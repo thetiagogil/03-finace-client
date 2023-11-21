@@ -1,5 +1,5 @@
-/* DATA MANAGEMENT BOX */
-.tran-box-dataManage {
+/* DATA INFO BOX */
+.tran-box-info {
   width: 60rem;
   display: flex;
   justify-content: space-between;
@@ -7,10 +7,18 @@
   margin: 1rem;
 }
 
-.tran-box-dataManage select {
+/* DATA MANAGEMENT BOX */
+.tran-box-management {
+  width: 60rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem;
+}
+
+.tran-box-management select {
   height: 1.5rem;
   font-size: 0.9rem;
-  border: none;
   outline: none;
   border: 1px solid rgb(230, 230, 230);
   border-radius: 1rem;
@@ -19,9 +27,13 @@
   appearance: none;
 }
 
-.tran-box-dataManage button {
-  height: 1.5rem;
-  width: 1.5rem;
+.tran-box-management select option {
+  text-align: center;
+}
+
+.tran-box-management button {
+  height: 1.3rem;
+  width: 1.3rem;
   border: none;
   border-radius: 0.5rem;
   transition-duration: 0.5s;
@@ -30,22 +42,21 @@
   align-items: center;
 }
 
-.tran-box-dataManage button:hover {
+.tran-box-management button:hover {
   transform: rotate(180deg);
 }
 
-.tran-box-dataManage img {
-  height: 1.5rem;
-  width: 1.5rem;
+.tran-box-management img {
+  height: 1.3rem;
+  width: 1.3rem;
 }
 
-/* DATA TABLE CSS */
-.tran-table-container {
+/* DATA TABLE BOX */
+.tran-box-table {
   width: 60rem;
   margin: 2rem;
-  max-height: 80vh;
+  max-height: 60vh;
   overflow-y: auto;
-  overflow-x: none;
 }
 
 /* DATA DOES NOT EXIST OR IS NOT MATCHED*/
@@ -53,6 +64,8 @@
   color: gray;
   margin: 4rem;
   font-style: italic;
+  display: flex;
+  justify-content: center;
 }
 
 /* DATA EXISTS */
@@ -98,12 +111,12 @@
 
 .tran-table th:nth-child(3),
 .tran-table td:nth-child(3) {
-  width: 8rem;
+  width: 7rem;
 }
 
 .tran-table th:nth-child(4),
 .tran-table td:nth-child(4) {
-  width: 5rem;
+  width: 7rem;
 }
 
 .tran-table th:nth-child(5),
