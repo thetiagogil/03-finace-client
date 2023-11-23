@@ -1,7 +1,7 @@
 /* CSS CREATE FOR THE DATE PICKER CALENDAR */
 .react-datepicker {
   font-family: Arial, sans-serif;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(230, 230, 230);
   border-radius: 4px;
   display: inline-block;
   position: relative;
@@ -9,8 +9,11 @@
 
 .react-datepicker__header {
   background-color: rgb(35, 45, 55);
-  color: #fff;
   border-bottom: none;
+}
+
+.react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
+  color: rgb(230, 230, 230);
 }
 
 .react-datepicker__day-name,
@@ -22,17 +25,17 @@
 }
 
 .react-datepicker__day-name {
-  color: #fff;
+  color: white
 }
 
 .react-datepicker__day--selected {
   background-color: rgb(35, 45, 55);
-  color: #fff;
+  color: white
 }
 
 .react-datepicker__day--keyboard-selected {
   background-color: rgb(35, 45, 55);
-  color: #fff;
+  color: white
 }
 
 .react-datepicker__day:hover {

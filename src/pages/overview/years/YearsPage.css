@@ -1,0 +1,27 @@
+.over-yearsBox {
+  width: 60vw;
+  display: flex;
+  margin-top: 5rem;
+  gap: 8rem;
+}
+
+.over-oneYearBox {
+  background-color: rgb(35, 45, 55);
+  color: white;
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  padding: 1rem;
+  transition-duration: 0.3s;
+}
+
+.over-oneYearBox:hover {
+    background-color: rgb(35, 45, 55, 0.9);
+  }
+
+.over-oneYearBox h3 {
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}

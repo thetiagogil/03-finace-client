@@ -1,14 +1,22 @@
 /* DATA INFO BOX */
-.tran-box-info {
+.tran-infoBox {
   width: 60rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: 1rem;
+  margin: 2rem;
+  gap: 5rem
+}
+
+.tran-infoBox-header {
+  font-weight: bold;
+}
+
+.tran-infoBox-span {
+  color: rgb(170, 170, 170);
 }
 
 /* DATA MANAGEMENT BOX */
-.tran-box-management {
+.tran-managementBox {
   width: 60rem;
   display: flex;
   justify-content: space-between;
@@ -16,7 +24,7 @@
   margin: 2rem;
 }
 
-.tran-box-management select {
+.tran-managementBox select {
   height: 1.5rem;
   font-size: 0.9rem;
   outline: none;
@@ -27,11 +35,11 @@
   appearance: none;
 }
 
-.tran-box-management select option {
+.tran-managementBox select option {
   text-align: center;
 }
 
-.tran-box-management button {
+.tran-managementBox button {
   height: 1.3rem;
   width: 1.3rem;
   border: none;
@@ -42,27 +50,25 @@
   align-items: center;
 }
 
-.tran-box-management button:hover {
+.tran-managementBox button:hover {
   transform: rotate(180deg);
 }
 
-.tran-box-management img {
+.tran-managementBox img {
   height: 1.3rem;
-  width: 1.3rem;
 }
 
 /* DATA TABLE BOX */
-.tran-box-table {
+.tran-tableBox {
   width: 60rem;
   margin: 2rem;
-  max-height: 60vh;
-  overflow-y: auto;
+  height: 30rem;
 }
 
 /* DATA DOES NOT EXIST OR IS NOT MATCHED*/
 .tran-table-noData {
   color: gray;
-  margin: 4rem;
+  margin: 2rem;
   font-style: italic;
   display: flex;
   justify-content: center;
@@ -86,19 +92,28 @@
   background-color: rgb(35, 45, 55);
   color: white;
   text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 2;
+  position: relative;
+}
+
+.tran-table th button {
+  background-color: transparent;
+  color: white;
+  font-size: 0.7rem;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* /* DATA TABLE BORDERS */
 .tran-table
   th:not(:last-child):not(:nth-last-child(2)):not(:nth-last-child(3)) {
-  border-right: 1px solid #ddd;
+  border-right: 1px solid rgb(230, 230, 230);
 }
 
 .tran-table td {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid rgb(220, 220, 220);
 }
 
 /* DATA TABLE SIZES */
@@ -147,8 +162,6 @@
 .tran-table td:nth-child(6) button,
 .tran-table td:nth-child(7) button {
   background-color: transparent;
-  height: 1.1rem;
-  width: 1.1rem;
   border: none;
   filter: opacity(20%);
   padding: 0;
@@ -158,7 +171,6 @@
 .tran-table td:nth-child(6) img,
 .tran-table td:nth-child(7) img {
   height: 1.1rem;
-  width: 1.1rem;
 }
 
 .tran-table td:nth-child(6) button:hover,

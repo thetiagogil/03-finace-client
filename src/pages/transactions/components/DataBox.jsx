@@ -2,6 +2,7 @@ import editIcon from "../../../assets/icon-edit.png";
 import trashIcon from "../../../assets/icon-trash.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
+import { format } from "date-fns";
 import DataFormUpdate from "../forms/DataFormUpdate";
 
 const DataBox = ({ oneData, readAllData, typeProp }) => {
@@ -43,16 +44,14 @@ const DataBox = ({ oneData, readAllData, typeProp }) => {
   };
 
   // TRANSFORM DATE TO DECENT FORMAT
-  const date = new Date(oneData.date).toLocaleDateString();
+  const date = format(new Date(oneData.date), "yyyy/MM/dd");
 
   return (
     <>
       <td>{date}</td>
       <td>{oneData.category}</td>
       <td>{oneData.subCategory}</td>
-      <td>
-        {oneData.value.toFixed(2)} {oneData.currency}
-      </td>
+      <td>{oneData.value.toFixed(2)} €</td>
       <td>{oneData.description}</td>
 
       <td>

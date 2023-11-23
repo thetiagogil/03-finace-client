@@ -5,6 +5,7 @@ import "./forms/DataFormDatepicker.css";
 import crossIcon from "../../assets/icon-plus.png";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { format } from "date-fns";
 import DataBox from "./components/DataBox";
 import DataFormCreate from "./forms/DataFormCreate";
 
@@ -124,7 +125,7 @@ const TransactionsPage = ({ typeProp }) => {
     "December",
   ];
 
-  // FILTER DATA BY YEARS
+  // FILTER DATA BY SUB CATEGORY
   const filterBySubCategory = () => {
     let subCatArray = [];
     const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
@@ -181,8 +182,33 @@ const TransactionsPage = ({ typeProp }) => {
     return data.length > 0;
   };
 
+  // GET THE LAST DATE
+  const getLastRecordedDate = () => {
+    if (data.length === 0) {
+      return { lastDate: "No data available", daysAgo: "N/A" };
+    }
+
+    const sortedData = [...data].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
+
+    const mostRecentData = sortedData[0];
+    const mostRecentDate = new Date(mostRecentData.date);
+
+    const today = new Date();
+    const daysAgo = Math.floor(
+      (today - mostRecentDate) / (24 * 60 * 60 * 1000)
+    );
+
+    return { lastDate: format(mostRecentDate, "yyyy-MM-dd"), daysAgo };
+  };
+
   // TRANSFORM DATE TO DECENT FORMAT
-  const date = new Date().toLocaleDateString();
+  const currentDate = format(new Date(), "yyyy/MM/dd");
+  const lastRecordedDate =
+    getLastRecordedDate().lastDate !== "No data available"
+      ? format(new Date(getLastRecordedDate().lastDate), "yyyy/MM/dd")
+      : "No data available";
 
   // EFFECT TO FETCH DATA
   useEffect(() => {
@@ -191,24 +217,31 @@ const TransactionsPage = ({ typeProp }) => {
 
   return (
     <div className="container">
-      <div className="tran-box-info">
-        <section>
-          <p>Date of today</p>
-          <p>{date}</p>
-        </section>
+      <div className="tran-infoBox">
+          <section>
+            <p className="tran-infoBox-header">Date of today:</p>
+            <p>{currentDate}</p>
+          </section>
+
+          {typeProp === "tracked" && (
+            <section>
+              <p className="tran-infoBox-header">Date of the last record:</p>
+              <p>
+                {lastRecordedDate}{" "}
+                <span className="tran-infoBox-span">
+                  ({getLastRecordedDate().daysAgo} days ago)
+                </span>
+              </p>
+            </section>
+          )}
 
         <section>
-          <p>Date of today</p>
-          <p>{date}</p>
-        </section>
-
-        <section>
-          <p>Nº of {typeProp} data</p>
+          <p className="tran-infoBox-header">Nº of {typeProp} data:</p>
           <p>{dataFiltered().length}</p>
         </section>
       </div>
 
-      <div className="tran-box-management">
+      <div className="tran-managementBox">
         <section></section>
         <section>
           {/* SELECT FOR YEARS*/}
@@ -257,7 +290,7 @@ const TransactionsPage = ({ typeProp }) => {
             onChange={(event) => setSelectedSubCategory(event.target.value)}
             value={selectedSubCategory}
           >
-            <option value="">Filter by Sub Category</option>
+            <option value="">Filter by sub category</option>
             {filterBySubCategory().map((cat) => (
               <option key={cat} value={cat}>
                 {cat}
@@ -286,7 +319,7 @@ const TransactionsPage = ({ typeProp }) => {
         )}
       </div>
 
-      <div className="tran-box-table">
+      <div className="tran-tableBox">
         {/* DATA TABLE */}
         {!handleDataExists() && (
           <p className="tran-table-noData">there is no data created</p>
@@ -305,7 +338,7 @@ const TransactionsPage = ({ typeProp }) => {
                   </button>
                 </th>
                 <th>Category</th>
-                <th>Sub Category</th>
+                <th>Sub category</th>
                 <th>
                   Value{" "}
                   <button onClick={sortByValue}>

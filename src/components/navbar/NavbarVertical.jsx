@@ -38,11 +38,15 @@ const NavbarVertical = () => {
   const handleOverviewSelection = (option) => {
     setSelectedOverview(option);
     setOverviewDropdown(false);
+    setOverviewDropdownRotation(false);
+    setTransactionsDropdownRotation(false);
   };
 
   const handleTransactionsSelection = (option) => {
     setSelectedTransactions(option);
     setTransactionsDropdown(false);
+    setOverviewDropdownRotation(false);
+    setTransactionsDropdownRotation(false);
   };
 
   const handleHomeClick = () => {

@@ -17,13 +17,10 @@ const DataForm = ({
   setCurrency,
   setDate,
   setDescription,
-  functionType
+  functionType,
 }) => {
   // CATEGORY ARRAY
   const categoriesArray = ["Income", "Expense"];
-
-  // CURRENCY ARRAY
-  const currencyArray = ["€", "$", "£"];
 
   return (
     <form className="data-form">
@@ -82,28 +79,12 @@ const DataForm = ({
               type="text"
               value={value}
               onChange={(event) => {
-                const newValue = event.target.value.replace(/[^0-9.]/g, '')
+                const newValue = event.target.value.replace(/[^0-9.]/g, "");
                 setValue(newValue);
               }}
-              maxlength="11"
+              maxlength="16"
               required
             />
-          </label>
-
-          <label>
-            <p>Currency:</p>
-            <select
-              value={currency}
-              onChange={(event) => setCurrency(event.target.value)}
-              required
-            >
-              <option value=""></option>
-              {currencyArray.map((cur) => (
-                <option key={cur} value={cur}>
-                  {cur}
-                </option>
-              ))}
-            </select>
           </label>
         </div>
 

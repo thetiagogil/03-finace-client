@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 /* DATA FORM */
@@ -101,10 +102,12 @@
   width: 14.5rem;
 }
 
-.data-form-content div:nth-child(2) date,
-.data-form-content div:nth-child(2) input,
-.data-form-content div:nth-child(2) select {
+.data-form-content div:nth-child(2) input:nth-child(1) {
   width: 7rem;
+}
+
+.data-form-content div:nth-child(2) input:nth-child(2) {
+  width: 14.5rem;
 }
 
 .data-form-content div:nth-child(3) textarea {

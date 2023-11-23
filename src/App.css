@@ -33,3 +33,15 @@ p {
   align-items: center;
   justify-content: center;
 }
+
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(200, 200, 200);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(35, 45, 55);
+}
