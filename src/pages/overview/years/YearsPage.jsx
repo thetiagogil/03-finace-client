@@ -35,10 +35,10 @@ const YearsPage = ({ pageProp, typeProp }) => {
     }
   };
 
-  // FILTER DATA BY YEARS
+  // YEARS ARRAY
   const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
 
-  const filterByYears = () => {
+  const yearsArray = () => {
     let yearsArray = [];
 
     data.map((oneData) => {
@@ -53,7 +53,7 @@ const YearsPage = ({ pageProp, typeProp }) => {
     return yearsArray;
   };
 
-  // CALCULATE TOTAL INCOME, EXPENSE, AND NUMBER OF DATA
+  // CALCULATE TOTAL INCOME, EXPENSE, AND NUMBER OF DATA BY YEAR
   const calculateYearlyStats = (year) => {
     const filteredData = data.filter(
       (oneData) =>
@@ -87,20 +87,26 @@ const YearsPage = ({ pageProp, typeProp }) => {
     <div className="container">
       <div className="over-yearsBox">
         {dataLoaded &&
-          filterByYears().map((oneYear, index) => (
+          yearsArray().map((oneYear, index) => (
             <Link to={`/${pageProp}/${typeProp}/${oneYear}`} key={index}>
               <div className="over-oneYearBox">
-                <h3>{oneYear}</h3>
-                <p>
-                  Total Income: {calculateYearlyStats(oneYear).totalIncome} €
-                </p>
-                <p>
-                  Total Expense: {calculateYearlyStats(oneYear).totalExpense} €
-                </p>
-                <p>
-                  {typeUpperCase} Data Count:{" "}
-                  {calculateYearlyStats(oneYear).numberOfData}
-                </p>
+                <div>
+                  <h3>{oneYear}</h3>
+                </div>
+
+                <div>
+                  <p>
+                    Total Income: {calculateYearlyStats(oneYear).totalIncome} €
+                  </p>
+                  <p>
+                    Total Expense: {calculateYearlyStats(oneYear).totalExpense}{" "}
+                    €
+                  </p>
+                  <p>
+                    {typeUpperCase} Data Count:{" "}
+                    {calculateYearlyStats(oneYear).numberOfData}
+                  </p>
+                </div>
               </div>
             </Link>
           ))}

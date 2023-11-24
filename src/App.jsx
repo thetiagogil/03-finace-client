@@ -48,11 +48,11 @@ function App() {
         />
         <Route
           path="/overview/tracked/:year"
-          element={<MonthsPage />}
+          element={<MonthsPage typeProp="tracked" />}
         />
         <Route
           path="/overview/planned/:year"
-          element={<MonthsPage />}
+          element={<MonthsPage typeProp="planned" />}
         />
 
         {/* TRANSACTIONS ROUTES */}

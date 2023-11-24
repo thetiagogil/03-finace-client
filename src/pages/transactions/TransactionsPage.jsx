@@ -109,22 +109,6 @@ const TransactionsPage = ({ typeProp }) => {
     return yearsArray;
   };
 
-  // FILTER DATA BY MONTHS
-  const monthsArray = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
   // FILTER DATA BY SUB CATEGORY
   const filterBySubCategory = () => {
     let subCatArray = [];
@@ -210,6 +194,22 @@ const TransactionsPage = ({ typeProp }) => {
       ? format(new Date(getLastRecordedDate().lastDate), "yyyy/MM/dd")
       : "No data available";
 
+  // MONTHS ARRAY
+  const monthsArray = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   // EFFECT TO FETCH DATA
   useEffect(() => {
     readAllData();
@@ -218,22 +218,22 @@ const TransactionsPage = ({ typeProp }) => {
   return (
     <div className="container">
       <div className="tran-infoBox">
-          <section>
-            <p className="tran-infoBox-header">Date of today:</p>
-            <p>{currentDate}</p>
-          </section>
+        <section>
+          <p className="tran-infoBox-header">Date of today:</p>
+          <p>{currentDate}</p>
+        </section>
 
-          {typeProp === "tracked" && (
-            <section>
-              <p className="tran-infoBox-header">Date of the last record:</p>
-              <p>
-                {lastRecordedDate}{" "}
-                <span className="tran-infoBox-span">
-                  ({getLastRecordedDate().daysAgo} days ago)
-                </span>
-              </p>
-            </section>
-          )}
+        {typeProp === "tracked" && (
+          <section>
+            <p className="tran-infoBox-header">Date of the last record:</p>
+            <p>
+              {lastRecordedDate}{" "}
+              <span className="tran-infoBox-span">
+                ({getLastRecordedDate().daysAgo} days ago)
+              </span>
+            </p>
+          </section>
+        )}
 
         <section>
           <p className="tran-infoBox-header">Nº of {typeProp} data:</p>
