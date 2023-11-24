@@ -164,100 +164,129 @@ const MonthsPage = ({ typeProp }) => {
   }, [currentUser]);
 
   return (
-    <div className="container over-monthsTables table th">
+    <div className="container">
       <h1>{year}</h1>
 
-      {/* TOTALS TABLE */}
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Year Total</th>
+      <div className="over-table-box">
+        <div>
+          {/* TOTALS TABLE HEAD */}
+          <table>
+            <thead>
+              <tr>
+                <th>TOTAL</th>
+              </tr>
+            </thead>
 
-              {monthsArrayShort.map((oneMonth, index) => (
-                <th key={index}>{oneMonth}</th>
-              ))}
-            </tr>
-          </thead>
+            <tbody>
+              <tr>
+                <td>{calculateYearTotal()} €</td>
+              </tr>
+            </tbody>
+          </table>
 
-          <tbody>
-            <tr>
-              <td>{calculateYearTotal()} €</td>
-
-              {monthsArray.map((oneMonth, indexMonth) => (
-                <td key={indexMonth}>{filterByMonth(oneMonth)} €</td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* INCOMES TABLE */}
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Incomes</th>
-              {monthsArrayShort.map((oneMonth, index) => (
-                <th key={index}>{oneMonth}</th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody>
-            {subCategoryArray("Income").map((oneSubCat, indexSubCat) => (
-              <tr key={indexSubCat}>
-                <td>{oneSubCat}</td>
-
-                {monthsArray.map((oneMonth, indexMonth) => (
-                  <td key={indexMonth}>
-                    {filterBySubCategory(oneMonth, oneSubCat, "Income") !== 0
-                      ? `${filterBySubCategory(
-                          oneMonth,
-                          oneSubCat,
-                          "Income"
-                        )} €`
-                      : "-"}
-                  </td>
+          {/* TOTALS TABLE BODY */}
+          <table>
+            <thead>
+              <tr>
+                {monthsArrayShort.map((oneMonth, index) => (
+                  <th key={index}>{oneMonth}</th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
 
-      {/* EXPENSES TABLE */}
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Expenses</th>
-              {monthsArrayShort.map((oneMonth, index) => (
-                <th key={index}>{oneMonth}</th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody>
-            {subCategoryArray("Expense").map((oneSubCat, indexSubCat) => (
-              <tr key={indexSubCat}>
-                <td>{oneSubCat}</td>
-
+            <tbody>
+              <tr>
                 {monthsArray.map((oneMonth, indexMonth) => (
-                  <td key={indexMonth}>
-                    {filterBySubCategory(oneMonth, oneSubCat, "Expense") !== 0
-                      ? `${filterBySubCategory(
-                          oneMonth,
-                          oneSubCat,
-                          "Expense"
-                        )} €`
-                      : "-"}
-                  </td>
+                  <td key={indexMonth}>{filterByMonth(oneMonth)} €</td>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          {/* INCOME TABLE HEAD */}
+          <table>
+            <thead>
+              <tr>
+                <th>Incomes</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {subCategoryArray("Income").map((oneSubCat, indexSubCat) => (
+                <tr key={indexSubCat}>
+                  <td>{oneSubCat}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* INCOMES TABLE BODY */}
+          <table>
+            <thead>
+              <tr>
+                {monthsArrayShort.map((oneMonth, index) => (
+                  <th key={index}>{oneMonth}</th>
+                ))}
+              </tr>
+            </thead>
+
+            <tbody>
+              {subCategoryArray("Income").map((oneSubCat, indexSubCat) => (
+                <tr key={indexSubCat}>
+                  {monthsArray.map((oneMonth, indexMonth) => (
+                    <td key={indexMonth}>
+                      {filterBySubCategory(oneMonth, oneSubCat, "Income")} €
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          {/* EXPENSE TABLE HEAD */}
+          <table>
+            <thead>
+              <tr>
+                <th>Incomes</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {subCategoryArray("Expense").map((oneSubCat, indexSubCat) => (
+                <tr key={indexSubCat}>
+                  <td>{oneSubCat}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* EXPENSES TABLE BODY */}
+          <table>
+            <thead>
+              <tr>
+                {monthsArrayShort.map((oneMonth, index) => (
+                  <th key={index}>{oneMonth}</th>
+                ))}
+              </tr>
+            </thead>
+
+            <tbody>
+              {subCategoryArray("Expense").map((oneSubCat, indexSubCat) => (
+                <tr key={indexSubCat}>
+                  {monthsArray.map((oneMonth, indexMonth) => (
+                    <td key={indexMonth}>
+                      {filterBySubCategory(oneMonth, oneSubCat, "Expense")} €
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
