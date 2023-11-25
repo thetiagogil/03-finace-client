@@ -167,43 +167,43 @@ const MonthsPage = ({ typeProp }) => {
     <div className="container">
       <h1>{year}</h1>
 
-      <div className="over-table-box">
-        <div>
-          {/* TOTALS TABLE HEAD */}
-          <table>
-            <thead>
-              <tr>
-                <th>TOTAL</th>
-              </tr>
-            </thead>
+      <div className="over-totals-table">
+        {/* TOTALS TABLE HEAD */}
+        <table>
+          <thead>
+            <tr>
+              <th>TOTAL</th>
+            </tr>
+          </thead>
 
-            <tbody>
-              <tr>
-                <td>{calculateYearTotal()} €</td>
-              </tr>
-            </tbody>
-          </table>
+          <tbody>
+            <tr>
+              <td>{calculateYearTotal()} €</td>
+            </tr>
+          </tbody>
+        </table>
 
-          {/* TOTALS TABLE BODY */}
-          <table>
-            <thead>
-              <tr>
-                {monthsArrayShort.map((oneMonth, index) => (
-                  <th key={index}>{oneMonth}</th>
-                ))}
-              </tr>
-            </thead>
+        {/* TOTALS TABLE BODY */}
+        <table>
+          <thead>
+            <tr>
+              {monthsArrayShort.map((oneMonth, index) => (
+                <th key={index}>{oneMonth}</th>
+              ))}
+            </tr>
+          </thead>
 
-            <tbody>
-              <tr>
-                {monthsArray.map((oneMonth, indexMonth) => (
-                  <td key={indexMonth}>{filterByMonth(oneMonth)} €</td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+          <tbody>
+            <tr>
+              {monthsArray.map((oneMonth, indexMonth) => (
+                <td key={indexMonth}>{filterByMonth(oneMonth)} €</td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
+      <div className="over-main-table">
         <div>
           {/* INCOME TABLE HEAD */}
           <table>

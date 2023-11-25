@@ -1,7 +1,7 @@
 import "./TransactionsPage.css";
 import "./forms/DataForm.css";
 import "react-datepicker/dist/react-datepicker.css";
-import "./forms/DataFormDatepicker.css";
+import "./forms/Datepicker.css";
 import crossIcon from "../../assets/icon-plus.png";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -172,19 +172,21 @@ const TransactionsPage = ({ typeProp }) => {
       return { lastDate: "No data available", daysAgo: "N/A" };
     }
 
-    const sortedData = [...data].sort(
+    const trackedData = data.filter((data) => data.type === "Tracked");
+
+    const sortedTrackedData = [...trackedData].sort(
       (a, b) => new Date(b.date) - new Date(a.date)
     );
 
-    const mostRecentData = sortedData[0];
-    const mostRecentDate = new Date(mostRecentData.date);
+    const mostRecentTrackedData = sortedTrackedData[0];
+    const mostRecentTrackedDate = new Date(mostRecentTrackedData.date);
 
     const today = new Date();
     const daysAgo = Math.floor(
-      (today - mostRecentDate) / (24 * 60 * 60 * 1000)
+      (today - mostRecentTrackedDate) / (24 * 60 * 60 * 1000)
     );
 
-    return { lastDate: format(mostRecentDate, "yyyy-MM-dd"), daysAgo };
+    return { lastDate: format(mostRecentTrackedDate, "yyyy-MM-dd"), daysAgo };
   };
 
   // TRANSFORM DATE TO DECENT FORMAT

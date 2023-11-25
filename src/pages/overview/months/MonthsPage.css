@@ -1,76 +1,88 @@
-.over-table-box {
-  width: 80rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.over-table-box div {
+/* TOTALS TABLE */
+.over-totals-table {
   display: flex;
 }
 
-.over-table-box div table {
+.over-totals-table table {
   border-collapse: collapse;
 }
 
-.over-table-box div table th,
-.over-table-box table td {
+.over-totals-table table th,
+.over-totals-table table td {
   font-size: 0.8rem;
   padding: 0.2rem 0.3rem 0.2rem;
   height: 1rem;
 }
 
-.over-table-box div table:nth-child(1) {
+.over-totals-table table th {
+  color: white;
+  width: 3rem;
+  border-right: 1px solid rgb(220, 220, 220);
+}
+
+.over-totals-table table th {
+  background-color: rgb(35, 45, 55);
+}
+
+/* INCOMES AND EXPENSES TABLES */
+.over-main-table {
+  width: 80rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  gap: 4rem;
+}
+
+.over-main-table div {
+  display: flex;
+}
+
+.over-main-table table {
+  border-collapse: collapse;
+}
+
+.over-main-table table th,
+.over-main-table table td {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.3rem 0.2rem;
+  height: 1rem;
+}
+
+.over-main-table table:nth-child(1) {
   text-align: left;
 }
 
-/* OVERALL TABLE SPECS */
-.over-table-box div table th {
+/*  MAIN TABLE SPECS */
+.over-main-table table th {
   color: white;
   width: 4rem;
   border-right: 1px solid rgb(220, 220, 220);
 }
 
-.over-table-box div table td {
+.over-main-table div table td {
   text-align: right;
   border-top: 1px solid rgb(220, 220, 220);
 }
 
-.over-table-box div:not(:nth-child(1)) table:nth-child(1) td {
+.over-main-table div table:nth-child(1) td {
   text-align: left;
 }
 
-/* TOTAL TABLE SPECS */
-.over-table-box div:nth-child(1) {
-  margin-top: 2rem;
-}
-
-.over-table-box div:nth-child(1) table th {
-  background-color: rgb(35, 45, 55);
-}
-
 /* INCOME TABLE SPECS */
-.over-table-box div:nth-child(2) {
-  margin-top: 6rem;
-}
-
-.over-table-box div:nth-child(2) table th {
+.over-main-table div:nth-child(1) table th {
   background-color: rgb(18, 77, 136);
 }
 
-.over-table-box div:nth-child(2) table tr {
+.over-main-table div:nth-child(1) table tr {
   background-color: rgb(18, 77, 136, 0.05);
 }
 
 /* EXPENSE TABLE SPECS */
-.over-table-box div:nth-child(3) {
-  margin-top: 4rem;
-}
-
-.over-table-box div:nth-child(3) table th {
+.over-main-table div:nth-child(2) table th {
   background-color: rgb(80, 26, 97);
 }
 
-.over-table-box div:nth-child(3) table tr {
+.over-main-table div:nth-child(2) table tr {
   background-color: rgb(80, 26, 97, 0.05);
 }
