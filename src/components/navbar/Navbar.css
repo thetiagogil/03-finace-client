@@ -1,129 +1,4 @@
-/* VERTICAL NAVBAR */
-.vNav {
-  background-color: rgb(35, 45, 55);
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-  z-index: 10
-}
-
-.vNav-default-style {
-  width: 4.5rem;
-}
-
-.vNav-hovered-style {
-  width: 17rem;
-}
-
-.vNav:hover h3,
-.vNav:hover span {
-  opacity: 1;
-}
-
-.vNav img {
-  filter: brightness(0) invert(1);
-  width: 1.5rem;
-}
-
-.vNav a {
-  display: flex;
-  align-items: center;
-}
-
-/* VERTICAL NAVBAR LOGO */
-
-.vNav-sec-logo {
-  margin: 1.25rem 1rem 1.25rem;
-  padding: 0 0.5rem 0;
-  display: flex;
-}
-
-.vNav-sec-logo h3 {
-  color: white;
-  opacity: 0;
-  overflow: hidden;
-  opacity: 1;
-  transition: opacity 0.5s;
-}
-
-/* VERTICAL NAVBAR BAR */
-.vNav-sec-bar {
-  border-top: 1px solid rgb(100, 100, 100);
-  margin: 1px 1rem 4rem 1rem;
-}
-
-/* VERTICAL NAVBAR ICONS */
-.vNav-sec-icons {
-  margin: 1rem;
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  transition-duration: 0.3s;
-
-  overflow: hidden;
-  opacity: 1;
-  transition: opacity 0.5s;
-}
-
-.vNav-sec-icons:hover {
-  background-color: rgb(90, 90, 120, 0.5);
-  border-radius: 0.5rem;
-}
-
-.vNav-sec-icons-active {
-  background-color: rgb(90, 90, 120);
-  border-radius: 0.5rem;
-}
-
-.vNav-sec-icons-hidden {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.vNav-sec-icons-hidden-button {
-  color: white;
-  background-color: rgb(110, 110, 150, 0.5);
-  width: 1.3rem;
-  height: 1.3rem;
-  border: none;
-  border-radius: 0.3rem;
-  transition-duration: 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.vNav-sec-icons-hidden-button:hover {
-  background-color: rgb(35, 45, 55, 0.5);
-}
-
-.vNav-sec-icons-hidden-button-rotate {
-  transform: rotate(180deg);
-  transition-duration: 0.3s;
-}
-
-.vNav-sec-icons-hidden-button img {
-  width: 0.8rem;
-  height: 0.8rem;
-}
-
-.vNav-sec-icons-hidden-span-main {
-  color: white;
-  padding-left: 1rem;
-}
-
-.vNav-sec-icons-hidden-span-secondary {
-  color: rgb(200, 200, 200);
-  width: 100%;
-  padding-left: 2.5rem;
-}
-
-/* HORIZONTAL NAVBAR */
-.hNavbar {
+.navbar {
   background-color: rgb(240, 240, 245);
   height: 4rem;
   width: 100vw;
@@ -135,17 +10,17 @@
   z-index: 9
 }
 
-.hNavbar-notAuth {
+.navbar-notAuth {
   display: flex;
   justify-content: end;
 }
 
-.hNavbar-isAuth {
+.navbar-isAuth {
   display: flex;
   justify-content: space-between;
 }
 
-.hNavbar button {
+.navbar button {
   width: 4.5rem;
   margin-right: 1rem;
   padding: 0.5rem;
@@ -153,26 +28,26 @@
   transition-duration: 0.5s;
 }
 
-.hNavbar h2 {
+.navbar h2 {
   margin-left: 6rem;
 }
 
-.hNavbar-login {
+.navbar-login {
   color: rgb(35, 45, 55);
   border: 1px solid rgb(35, 45, 55, 0.5);
 }
 
-.hNavbar-login:hover {
+.navbar-login:hover {
   border-radius: 0rem;
 }
 
-.hNavbar-signup {
+.navbar-signup {
   background-color: rgb(35, 45, 55);
   color: white;
   border: none;
 }
 
-.hNavbar-signup:hover {
+.navbar-signup:hover {
   background-color: rgb(35, 45, 55, 0.75);
   border-radius: 0rem;
 }

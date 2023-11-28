@@ -64,7 +64,7 @@ const MonthsPage = ({ typeProp }) => {
     return total;
   };
 
-  // FILTER BY MONTH
+  // FILTER BY MONTH AND SUM VALUES
   const filterByMonth = (month) => {
     const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
 
@@ -86,7 +86,29 @@ const MonthsPage = ({ typeProp }) => {
     return filteredDataSum;
   };
 
-  // FILTER BY SUB CATEGORY
+  // FILTER BY CATEGORY AND SUM
+  const filterByCategory = (month, category) => {
+    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
+
+    const filteredData = data
+      .filter((oneData) => oneData.type === typeUpperCase)
+      .filter(
+        (oneData) => new Date(oneData.date).getFullYear() === parseInt(year)
+      )
+      .filter(
+        (oneData) => monthsArray[new Date(oneData.date).getMonth()] === month
+      )
+      .filter((oneData) => oneData.category === category);
+
+    const filteredDataSum = filteredData.reduce(
+      (sum, oneData) => sum + oneData.value,
+      0
+    );
+
+    return filteredDataSum;
+  };
+
+  // FILTER BY SUB CATEGORY AND SUM
   const filterBySubCategory = (month, subCategory, category) => {
     const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
 
@@ -165,128 +187,90 @@ const MonthsPage = ({ typeProp }) => {
 
   return (
     <div className="container">
-      <h1>{year}</h1>
+      <div className="over-info-box">
+        <div className="over-info">
+          <h1>{year}</h1>
+        </div>
 
-      <div className="over-totals-table">
-        {/* TOTALS TABLE HEAD */}
-        <table>
-          <thead>
-            <tr>
-              <th>TOTAL</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>{calculateYearTotal()} €</td>
-            </tr>
-          </tbody>
-        </table>
-
-        {/* TOTALS TABLE BODY */}
-        <table>
-          <thead>
-            <tr>
-              {monthsArrayShort.map((oneMonth, index) => (
-                <th key={index}>{oneMonth}</th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              {monthsArray.map((oneMonth, indexMonth) => (
-                <td key={indexMonth}>{filterByMonth(oneMonth)} €</td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
+        <div className="over-info-chart"></div>
       </div>
 
-      <div className="over-main-table">
-        <div>
-          {/* INCOME TABLE HEAD */}
-          <table>
-            <thead>
-              <tr>
-                <th>Incomes</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {subCategoryArray("Income").map((oneSubCat, indexSubCat) => (
-                <tr key={indexSubCat}>
-                  <td>{oneSubCat}</td>
+      <div className="over-table-box">
+        {subCategoryArray("Income").length > 0 && (
+          <div className="over-table">
+            {/* INCOME TABLE */}
+            <table className="over-table-incomes">
+              <thead>
+                <tr>
+                  <th>Incomes</th>
+                  {monthsArrayShort.map((oneMonth, index) => (
+                    <th key={index}>{oneMonth}</th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
 
-          {/* INCOMES TABLE BODY */}
-          <table>
-            <thead>
-              <tr>
-                {monthsArrayShort.map((oneMonth, index) => (
-                  <th key={index}>{oneMonth}</th>
+              <tbody>
+                {subCategoryArray("Income").map((oneSubCat, indexSubCat) => (
+                  <tr key={indexSubCat}>
+                    <td>{oneSubCat}</td>
+                    {monthsArray.map((oneMonth, indexMonth) => (
+                      <td key={indexMonth}>
+                        {filterBySubCategory(oneMonth, oneSubCat, "Income")} €
+                      </td>
+                    ))}
+                  </tr>
                 ))}
-              </tr>
-            </thead>
 
-            <tbody>
-              {subCategoryArray("Income").map((oneSubCat, indexSubCat) => (
-                <tr key={indexSubCat}>
+                <tr>
+                  <td>Total</td>
                   {monthsArray.map((oneMonth, indexMonth) => (
                     <td key={indexMonth}>
-                      {filterBySubCategory(oneMonth, oneSubCat, "Income")} €
+                      {filterByCategory(oneMonth, "Income")} €
                     </td>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        )}
 
-        <div>
-          {/* EXPENSE TABLE HEAD */}
-          <table>
-            <thead>
-              <tr>
-                <th>Incomes</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {subCategoryArray("Expense").map((oneSubCat, indexSubCat) => (
-                <tr key={indexSubCat}>
-                  <td>{oneSubCat}</td>
+        {subCategoryArray("Expense").length > 0 && (
+          <div className="over-table">
+            {/* EXPENSE TABLE */}
+            <table className="over-table-expenses">
+              <thead>
+                <tr>
+                  <th>Expenses</th>
+                  {monthsArrayShort.map((oneMonth, index) => (
+                    <th key={index}>{oneMonth}</th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
 
-          {/* EXPENSES TABLE BODY */}
-          <table>
-            <thead>
-              <tr>
-                {monthsArrayShort.map((oneMonth, index) => (
-                  <th key={index}>{oneMonth}</th>
+              <tbody>
+                {subCategoryArray("Expense").map((oneSubCat, indexSubCat) => (
+                  <tr key={indexSubCat}>
+                    <td>{oneSubCat}</td>
+                    {monthsArray.map((oneMonth, indexMonth) => (
+                      <td key={indexMonth}>
+                        {filterBySubCategory(oneMonth, oneSubCat, "Expense")} €
+                      </td>
+                    ))}
+                  </tr>
                 ))}
-              </tr>
-            </thead>
 
-            <tbody>
-              {subCategoryArray("Expense").map((oneSubCat, indexSubCat) => (
-                <tr key={indexSubCat}>
+                <tr>
+                  <td>Total</td>
                   {monthsArray.map((oneMonth, indexMonth) => (
                     <td key={indexMonth}>
-                      {filterBySubCategory(oneMonth, oneSubCat, "Expense")} €
+                      {filterByCategory(oneMonth, "Expense")} €
                     </td>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );

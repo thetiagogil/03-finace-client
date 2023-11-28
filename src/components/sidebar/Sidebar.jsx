@@ -1,4 +1,4 @@
-import "./Navbar.css";
+import "./Sidebar.css";
 import dropdownIcon from "../../assets/icon-dropdown.png";
 import finaceLogo from "../../assets/logo-finace.png";
 import dashboardIcon from "../../assets/icon-dashboard.png";
@@ -82,32 +82,32 @@ const NavbarVertical = () => {
     <div>
       {isAuthenticated && (
         <div
-          className={`vNav ${
-            isHovered ? "vNav-hovered-style" : "vNav-default-style"
+          className={`sidebar ${
+            isHovered ? "sidebar-hovered-style" : "sidebar-default-style"
           }`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           {/* FINACE LOGO */}
-          <section className="vNav-sec-logo">
+          <section className="sidebar-sec-logo">
             <Link to="/" onClick={() => handleHomeClick()}>
               <img src={finaceLogo} alt="Finance Logo" />
               {isHovered && <h3>IN/ACE</h3>}
             </Link>
           </section>
 
-          <div className="vNav-sec-bar" />
+          <div className="sidebar-sec-bar" />
 
           {/* DASHBOARD ICON */}
           <section
-            className={`vNav-sec-icons ${
-              activeLink === "dashboard" ? "vNav-sec-icons-active" : ""
+            className={`sidebar-sec-icons ${
+              activeLink === "dashboard" ? "sidebar-sec-icons-active" : ""
             }`}
           >
             <Link to="/dashboard" onClick={() => setActiveLink("dashboard")}>
               <img src={dashboardIcon} alt="Dashboard Logo" />
               {isHovered && (
-                <span className="vNav-sec-icons-hidden-span-main">
+                <span className="sidebar-sec-icons-hidden-span-main">
                   DASHBOARD
                 </span>
               )}
@@ -117,26 +117,26 @@ const NavbarVertical = () => {
           {/* OVERVIEW ICON */}
           <section>
             <div
-              className={`vNav-sec-icons ${
-                activeLink === "overview" ? "vNav-sec-icons-active" : ""
+              className={`sidebar-sec-icons ${
+                activeLink === "overview" ? "sidebar-sec-icons-active" : ""
               }`}
             >
               <Link>
                 <img src={overviewIcon} alt="Overview Logo" />
                 {isHovered && (
-                  <div className="vNav-sec-icons-hidden">
-                    <span className="vNav-sec-icons-hidden-span-main">
+                  <div className="sidebar-sec-icons-hidden">
+                    <span className="sidebar-sec-icons-hidden-span-main">
                       OVERVIEW
                     </span>
                     <button
                       onClick={handleOverviewDropdownToggle}
-                      className="vNav-sec-icons-hidden-button"
+                      className="sidebar-sec-icons-hidden-button"
                     >
                       <img
                         src={dropdownIcon}
                         className={
                           overviewDropdownRotation
-                            ? "vNav-sec-icons-hidden-button-rotate"
+                            ? "sidebar-sec-icons-hidden-button-rotate"
                             : ""
                         }
                         alt="Dropdown Arrow"
@@ -149,7 +149,7 @@ const NavbarVertical = () => {
 
             {overviewDropdown && (
               <section>
-                <div className="vNav-sec-icons">
+                <div className="sidebar-sec-icons">
                   <Link
                     to={"/overview/tracked"}
                     onClick={() => {
@@ -157,13 +157,13 @@ const NavbarVertical = () => {
                       setActiveLink("overview");
                     }}
                   >
-                    <span className="vNav-sec-icons-hidden-span-secondary">
+                    <span className="sidebar-sec-icons-hidden-span-secondary">
                       Tracked Overview
                     </span>
                   </Link>
                 </div>
 
-                <div className="vNav-sec-icons">
+                <div className="sidebar-sec-icons">
                   <Link
                     to={"/overview/planned"}
                     onClick={() => {
@@ -171,7 +171,7 @@ const NavbarVertical = () => {
                       setActiveLink("overview");
                     }}
                   >
-                    <span className="vNav-sec-icons-hidden-span-secondary">
+                    <span className="sidebar-sec-icons-hidden-span-secondary">
                       Planned Overview
                     </span>
                   </Link>
@@ -183,26 +183,26 @@ const NavbarVertical = () => {
           {/* TRANSACTIONS ICON */}
           <section>
             <div
-              className={`vNav-sec-icons ${
-                activeLink === "transactions" ? "vNav-sec-icons-active" : ""
+              className={`sidebar-sec-icons ${
+                activeLink === "transactions" ? "sidebar-sec-icons-active" : ""
               }`}
             >
               <Link>
                 <img src={transactionsIcon} alt="Transactions Logo" />
                 {isHovered && (
-                  <div className="vNav-sec-icons-hidden">
-                    <span className="vNav-sec-icons-hidden-span-main">
+                  <div className="sidebar-sec-icons-hidden">
+                    <span className="sidebar-sec-icons-hidden-span-main">
                       TRANSACTIONS
                     </span>{" "}
                     <button
                       onClick={handleTransactionsDropdownToggle}
-                      className="vNav-sec-icons-hidden-button"
+                      className="sidebar-sec-icons-hidden-button"
                     >
                       <img
                         src={dropdownIcon}
                         className={
                           transactionsDropdownRotation
-                            ? "vNav-sec-icons-hidden-button-rotate"
+                            ? "sidebar-sec-icons-hidden-button-rotate"
                             : ""
                         }
                         alt="Dropdown Arrow"
@@ -215,7 +215,7 @@ const NavbarVertical = () => {
 
             {transactionsDropdown && (
               <div>
-                <div className="vNav-sec-icons">
+                <div className="sidebar-sec-icons">
                   <Link
                     to={"/transactions/tracked"}
                     onClick={() => {
@@ -223,13 +223,13 @@ const NavbarVertical = () => {
                       setActiveLink("transactions");
                     }}
                   >
-                    <span className="vNav-sec-icons-hidden-span-secondary">
+                    <span className="sidebar-sec-icons-hidden-span-secondary">
                       Tracked Transactions
                     </span>
                   </Link>
                 </div>
 
-                <div className="vNav-sec-icons">
+                <div className="sidebar-sec-icons">
                   <Link
                     to={"/transactions/planned"}
                     onClick={() => {
@@ -237,7 +237,7 @@ const NavbarVertical = () => {
                       setActiveLink("transactions");
                     }}
                   >
-                    <span className="vNav-sec-icons-hidden-span-secondary">
+                    <span className="sidebar-sec-icons-hidden-span-secondary">
                       Planned Transactions
                     </span>
                   </Link>

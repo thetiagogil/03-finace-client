@@ -1,0 +1,129 @@
+/* DASHBOARD BIG BOX */
+.dash-box {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* TABLE BOX */
+.dash-table-box {
+  width: 38rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dash-table {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  border-radius: 0.5rem;
+}
+
+.dash-table table {
+  border-collapse: collapse;
+  margin: 1rem;
+  width: 100%;
+}
+
+.dash-table table th,
+.dash-table table td {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.3rem 0.2rem;
+  height: 1rem;
+}
+
+.dash-table table tr th:nth-child(1) {
+  text-align: left;
+}
+
+/*  MAIN TABLE SPECS */
+.dash-table table th {
+  color: white;
+  border-right: 1px solid rgb(220, 220, 220);
+}
+
+.dash-table table td {
+  width: 7rem;
+  text-align: right;
+}
+
+.dash-table table tr:not(:first-child) {
+  border-top: 1px solid rgb(220, 220, 220);
+}
+
+.dash-table table td:nth-child(1) {
+  text-align: left;
+}
+
+.dash-table table tbody tr:last-child td {
+  font-weight: bold;
+  border-top: 1px solid black;
+}
+
+/* INCOME TABLE SPECS */
+.dash-table-income th {
+  background-color: rgb(20, 80, 140, 0.6);
+}
+
+.dash-table-income tbody tr:last-child td:first-child {
+  color: rgb(20, 80, 140);
+}
+
+/* EXPENSE TABLE SPECS */
+.dash-table-expense th {
+  background-color: rgb(80, 20, 100, 0.6);
+}
+
+.dash-table-expense tbody tr:last-child td:first-child {
+  color: rgb(80, 20, 100);
+}
+
+/* SUMMARY BOX */
+.dash-summary-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dash-summary-box h2 {
+  margin-bottom: 1rem;
+}
+
+.dash-summary {
+  display: flex;
+  gap: 1rem;
+}
+
+.dash-summary-category-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dash-summary-income-chart {
+  background-color: white;
+  width: 22.5rem;
+  height: 11rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.dash-summary-expense-chart {
+  background-color: white;
+  width: 22.5rem;
+  height: 11rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.dash-summary-type-chart {
+  background-color: white;
+  width: 22.5rem;
+  height: 25rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}

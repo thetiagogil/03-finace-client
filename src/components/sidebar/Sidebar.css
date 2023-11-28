@@ -1,0 +1,121 @@
+.sidebar {
+    background-color: rgb(35, 45, 55);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    z-index: 10
+  }
+  
+  .sidebar-default-style {
+    width: 4.5rem;
+  }
+  
+  .sidebar-hovered-style {
+    width: 17rem;
+  }
+  
+  .sidebar:hover h3,
+  .sidebar:hover span {
+    opacity: 1;
+  }
+  
+  .sidebar img {
+    filter: brightness(0) invert(1);
+    width: 1.5rem;
+  }
+  
+  .sidebar a {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* SIDEBAR LOGO */
+  .sidebar-sec-logo {
+    margin: 1.25rem 1rem 1.25rem;
+    padding: 0 0.5rem 0;
+    display: flex;
+  }
+  
+  .sidebar-sec-logo h3 {
+    color: white;
+    opacity: 0;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  
+  /* SIDEBAR DIVISION */
+  .sidebar-sec-bar {
+    border-top: 1px solid rgb(100, 100, 100);
+    margin: 1px 1rem 4rem 1rem;
+  }
+  
+  /* SIDEBAR ICONS */
+  .sidebar-sec-icons {
+    margin: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    transition-duration: 0.3s;
+  
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  
+  .sidebar-sec-icons:hover {
+    background-color: rgb(90, 90, 120, 0.5);
+    border-radius: 0.5rem;
+  }
+  
+  .sidebar-sec-icons-active {
+    background-color: rgb(90, 90, 120);
+    border-radius: 0.5rem;
+  }
+  
+  .sidebar-sec-icons-hidden {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .sidebar-sec-icons-hidden-button {
+    color: white;
+    background-color: rgb(110, 110, 150, 0.5);
+    width: 1.3rem;
+    height: 1.3rem;
+    border: none;
+    border-radius: 0.3rem;
+    transition-duration: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .sidebar-sec-icons-hidden-button:hover {
+    background-color: rgb(35, 45, 55, 0.5);
+  }
+  
+  .sidebar-sec-icons-hidden-button-rotate {
+    transform: rotate(180deg);
+    transition-duration: 0.3s;
+  }
+  
+  .sidebar-sec-icons-hidden-button img {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+  
+  .sidebar-sec-icons-hidden-span-main {
+    color: white;
+    padding-left: 1rem;
+  }
+  
+  .sidebar-sec-icons-hidden-span-secondary {
+    color: rgb(200, 200, 200);
+    width: 100%;
+    padding-left: 2.5rem;
+  }

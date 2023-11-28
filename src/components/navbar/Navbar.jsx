@@ -41,27 +41,27 @@ const NavbarHorizontal = () => {
   return (
     <div>
       {!isAuthenticated && (
-        <div className="hNavbar hNavbar-notAuth">
+        <div className="navbar navbar-notAuth">
           <div>
             <Link to={"/login"}>
-              <button className="hNavbar-login">Log In</button>
+              <button className="navbar-login">Log In</button>
             </Link>
           </div>
 
           <div>
             <Link to={"/signup"}>
-              <button className="hNavbar-signup">Sign Up</button>
+              <button className="navbar-signup">Sign Up</button>
             </Link>
           </div>
         </div>
       )}
 
       {isAuthenticated && (
-        <div className="hNavbar hNavbar-isAuth">
+        <div className="navbar navbar-isAuth">
           {handlePageHeader()}
 
           <Link onClick={() => handleLogout()}>
-            <button className="hNavbar-signup">logout</button>
+            <button className="navbar-signup">logout</button>
           </Link>
         </div>
       )}
