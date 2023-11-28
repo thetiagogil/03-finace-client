@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 
 const MonthsPage = ({ typeProp }) => {
+  const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
   const { year } = useParams();
 
   const token = localStorage.getItem("authToken");
@@ -89,8 +90,6 @@ const MonthsPage = ({ typeProp }) => {
 
   // CALCULATE YEAR TOTAL
   const calculateYearTotal = () => {
-    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
-
     const filteredData = data.filter(
       (oneData) =>
         oneData.type === typeUpperCase &&
@@ -116,8 +115,6 @@ const MonthsPage = ({ typeProp }) => {
 
   // FILTER BY MONTH AND SUM VALUES
   const filterByMonth = (month) => {
-    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
-
     const filteredData = data
       .filter((oneData) => oneData.type === typeUpperCase)
       .filter(
@@ -138,8 +135,6 @@ const MonthsPage = ({ typeProp }) => {
 
   // FILTER BY CATEGORY AND SUM
   const filterByCategory = (month, category) => {
-    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
-
     const filteredData = data
       .filter((oneData) => oneData.type === typeUpperCase)
       .filter(
@@ -160,8 +155,6 @@ const MonthsPage = ({ typeProp }) => {
 
   // FILTER BY SUB CATEGORY AND SUM
   const filterBySubCategory = (month, subCategory, category) => {
-    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
-
     const filteredData = data
       .filter((oneData) => oneData.type === typeUpperCase)
       .filter(
@@ -185,7 +178,7 @@ const MonthsPage = ({ typeProp }) => {
     labels: monthsArrayShort,
     datasets: [
       {
-        label: `${typeProp} Values`,
+        label: `${year} Monthly ${typeUpperCase} Values`,
         data: monthsArray.map((month) => filterByMonth(month)),
       },
     ],
@@ -199,7 +192,7 @@ const MonthsPage = ({ typeProp }) => {
         labels: monthsArrayShort,
         datasets: [
           {
-            label: `${typeProp} Values`,
+            label: `${year} Monthly ${typeUpperCase} Values`,
             data: monthsArray.map((month) => filterByMonth(month)),
           },
         ],
