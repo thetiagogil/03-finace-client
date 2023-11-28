@@ -1,4 +1,5 @@
 import "./MonthsPage.css";
+import MonthsPageLineChart from "./MonthsPageLineChart";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
@@ -35,6 +36,55 @@ const MonthsPage = ({ typeProp }) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // MONTHS ARRAY
+  const monthsArray = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const monthsArrayShort = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  // SUB CATEGORY ARRAY
+  const subCategoryArray = (category) => {
+    let subCatArray = [];
+    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
+
+    data.map((oneData) => {
+      if (
+        !subCatArray.includes(oneData.subCategory) &&
+        oneData.type === typeUpperCase &&
+        oneData.category === category
+      ) {
+        subCatArray.push(oneData.subCategory);
+      }
+    });
+
+    return subCatArray;
   };
 
   // CALCULATE YEAR TOTAL
@@ -131,59 +181,31 @@ const MonthsPage = ({ typeProp }) => {
     return filteredDataSum;
   };
 
-  // MONTHS ARRAY
-  const monthsArray = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const monthsArrayShort = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  // SUB CATEGORY ARRAY
-  const subCategoryArray = (category) => {
-    let subCatArray = [];
-    const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
-
-    data.map((oneData) => {
-      if (
-        !subCatArray.includes(oneData.subCategory) &&
-        oneData.type === typeUpperCase &&
-        oneData.category === category
-      ) {
-        subCatArray.push(oneData.subCategory);
-      }
-    });
-
-    return subCatArray;
-  };
+  const [lineChartData, setLineChartData] = useState({
+    labels: monthsArrayShort,
+    datasets: [
+      {
+        label: `${typeProp} Values`,
+        data: monthsArray.map((month) => filterByMonth(month)),
+      },
+    ],
+  });
 
   // EFFECT TO FETCH DATA
   useEffect(() => {
     readAllData();
-  }, [currentUser]);
+    if (dataLoaded) {
+      setLineChartData({
+        labels: monthsArrayShort,
+        datasets: [
+          {
+            label: `${typeProp} Values`,
+            data: monthsArray.map((month) => filterByMonth(month)),
+          },
+        ],
+      });
+    }
+  }, [currentUser, dataLoaded, typeProp]);
 
   return (
     <div className="container">
@@ -192,7 +214,9 @@ const MonthsPage = ({ typeProp }) => {
           <h1>{year}</h1>
         </div>
 
-        <div className="over-info-chart"></div>
+        <div className="over-info-chart">
+          <MonthsPageLineChart chartData={lineChartData} />
+        </div>
       </div>
 
       <div className="over-table-box">
