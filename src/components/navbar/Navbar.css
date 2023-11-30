@@ -1,5 +1,5 @@
 .navbar {
-  background-color: rgb(240, 240, 245);
+  background-color: rgb(245, 245, 245);
   height: 4rem;
   width: 100vw;
   position: fixed;
@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgb(200, 200, 200);
-  z-index: 9
+  z-index: 9;
 }
 
 .navbar-notAuth {
@@ -22,7 +22,7 @@
 
 .navbar button {
   width: 4.5rem;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   padding: 0.5rem;
   border-radius: 0.75rem;
   transition-duration: 0.5s;
@@ -48,6 +48,5 @@
 }
 
 .navbar-signup:hover {
-  background-color: rgb(35, 45, 55, 0.75);
   border-radius: 0rem;
 }

@@ -42,39 +42,43 @@ const LoginPage = () => {
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit} className="auths-form">
-        <h2>Log in to Fin/Ace</h2>
+      <div className="auths-box">
+        <Link to="/" className="auths-home-button">{"<"} back to home page</Link>
 
-        <div className="auths-form-inputs">
-          <label>
-            <input
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              required
-              placeholder="Username"
-            />
-          </label>
+        <form onSubmit={handleSubmit} className="auths-form">
+          <h2>Log in to Fin/Ace</h2>
 
-          <label>
-            <input
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              required
-              type="password"
-              placeholder="Password"
-            />
-          </label>
-        </div>
+          <div className="auths-form-inputs">
+            <label>
+              <input
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                required
+                placeholder="Username"
+              />
+            </label>
 
-        <button>Log In</button>
+            <label>
+              <input
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+                type="password"
+                placeholder="Password"
+              />
+            </label>
+          </div>
 
-        <div className="auths-true">
-          <p>Not registered?</p>
-          <Link to="/signup">
-            <p>Create an account</p>
-          </Link>
-        </div>
-      </form>
+          <button>Log In</button>
+
+          <div className="auths-true">
+            <p>Not registered?</p>
+            <Link to="/signup">
+              <p>Create an account</p>
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

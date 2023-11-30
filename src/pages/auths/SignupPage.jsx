@@ -53,95 +53,99 @@ const SignupPage = () => {
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit} className="auths-form">
-        <h2>Create an account</h2>
+      <div className="auths-box">
+        <Link to="/" className="auths-home-button">{"<"} back to home page</Link>
 
-        <div className="auths-form-names">
-          <label>
-            <input
-              value={firstname}
-              onChange={(event) => setFirstname(event.target.value)}
-              required
-              placeholder="First name"
-              className="auths-form-names-first"
-            />
-          </label>
+        <form onSubmit={handleSubmit} className="auths-form">
+          <h2>Create an account</h2>
 
-          <label>
-            <input
-              value={lastname}
-              onChange={(event) => setLastname(event.target.value)}
-              required
-              placeholder="Last name"
-            />
-          </label>
-        </div>
+          <div className="auths-form-names">
+            <label>
+              <input
+                value={firstname}
+                onChange={(event) => setFirstname(event.target.value)}
+                required
+                placeholder="First name"
+                className="auths-form-names-first"
+              />
+            </label>
 
-        <div className="auths-form-inputs">
-          <label>
-            <input
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              required
-              placeholder="Username"
-            />
-          </label>
+            <label>
+              <input
+                value={lastname}
+                onChange={(event) => setLastname(event.target.value)}
+                required
+                placeholder="Last name"
+              />
+            </label>
+          </div>
 
-          <label
-            className={
-              error && error.includes("email") ? "auths-form-error" : ""
-            }
-          >
-            <input
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              required
-              placeholder="Email"
-            />
-          </label>
+          <div className="auths-form-inputs">
+            <label>
+              <input
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                required
+                placeholder="Username"
+              />
+            </label>
 
-          <label
-            className={
-              error && error.includes("Password") ? "auths-form-error" : ""
-            }
-          >
-            <input
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              required
-              type="password"
-              placeholder="Password"
-            />
-          </label>
+            <label
+              className={
+                error && error.includes("email") ? "auths-form-error" : ""
+              }
+            >
+              <input
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                placeholder="Email"
+              />
+            </label>
 
-          <label
-            className={
-              error && error.includes("Password") ? "auths-form-error" : ""
-            }
-          >
-            <input
-              value={confirmPassword}
-              onChange={(event) => setConfirmPassword(event.target.value)}
-              required
-              type="password"
-              placeholder="Confirm Password"
-            />
-          </label>
-        </div>
+            <label
+              className={
+                error && error.includes("Password") ? "auths-form-error" : ""
+              }
+            >
+              <input
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+                type="password"
+                placeholder="Password"
+              />
+            </label>
 
-        {error && <p className="auths-form-error-p">{error}</p>}
+            <label
+              className={
+                error && error.includes("Password") ? "auths-form-error" : ""
+              }
+            >
+              <input
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                required
+                type="password"
+                placeholder="Confirm Password"
+              />
+            </label>
+          </div>
 
-        <button className="auths-button" type="submit">
-          Sign Up
-        </button>
+          {error && <p className="auths-form-error-p">{error}</p>}
 
-        <div className="auths-true">
-          <p>Already have an account?</p>
-          <Link to="/login">
-            <p>Log in</p>
-          </Link>
-        </div>
-      </form>
+          <button className="auths-button" type="submit">
+            Sign Up
+          </button>
+
+          <div className="auths-true">
+            <p>Already have an account?</p>
+            <Link to="/login">
+              <p>Log in</p>
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

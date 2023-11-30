@@ -39,7 +39,7 @@ const NavbarHorizontal = () => {
   }, [location]);
 
   return (
-    <div>
+    <>
       {!isAuthenticated && (
         <div className="navbar navbar-notAuth">
           <div>
@@ -65,7 +65,7 @@ const NavbarHorizontal = () => {
           </Link>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

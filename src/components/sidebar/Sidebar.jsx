@@ -79,7 +79,7 @@ const NavbarVertical = () => {
   }, [activeLink]);
 
   return (
-    <div>
+    <>
       {isAuthenticated && (
         <div
           className={`sidebar ${
@@ -90,10 +90,8 @@ const NavbarVertical = () => {
         >
           {/* FINACE LOGO */}
           <section className="sidebar-sec-logo">
-            <Link to="/" onClick={() => handleHomeClick()}>
               <img src={finaceLogo} alt="Finance Logo" />
               {isHovered && <h3>IN/ACE</h3>}
-            </Link>
           </section>
 
           <div className="sidebar-sec-bar" />
@@ -247,7 +245,7 @@ const NavbarVertical = () => {
           </section>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

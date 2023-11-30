@@ -1,3 +1,23 @@
+/* AUTHS BOX */
+.auths-box {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem;
+  gap: 0.5rem;
+}
+
+/* BACK HOMEPAGE BUTTON */
+.auths-home-button {
+  color: rgb(190, 190, 190);
+  transition-duration: 0.3s;
+  font-size: 0.8rem;
+}
+
+.auths-home-button:hover {
+  color: gray;
+}
+
+/* AUTHS FORM */
 .auths-form {
   background-color: white;
   display: flex;
@@ -5,9 +25,9 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin: 4rem;
   padding: 2rem;
   border-radius: 0.3rem;
+  width: 15rem;
 }
 
 .auths-form h2 {
@@ -27,6 +47,10 @@
   outline: none;
   border-radius: 0.3rem;
   padding-left: 1rem;
+}
+
+.auths-form-names {
+  display: flex;
 }
 
 .auths-form-names label input {
