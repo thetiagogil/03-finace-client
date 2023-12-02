@@ -8,11 +8,12 @@ const HomePage = () => {
   return (
     <div>
       <div className="home-blue-box">
-        <h1>Ace your finances with FIN/ACE</h1>
-        <h2>
+        <h1>FIN/ACE</h1>
+        <h2>Ace your finances</h2>
+        <h3>
           Your personal finance hub - Where every decision counts and every plan
-          Unfolds.
-        </h2>
+          unfolds.
+        </h3>
       </div>
 
       <div className="home-sections">

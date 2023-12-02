@@ -96,10 +96,10 @@ const YearsPage = ({ pageProp, typeProp }) => {
 
                 <div>
                   <p>
-                    Total Income: {calculateYearlyStats(oneYear).totalIncome} €
+                    Total Income: {calculateYearlyStats(oneYear).totalIncome.toFixed(2)} €
                   </p>
                   <p>
-                    Total Expense: {calculateYearlyStats(oneYear).totalExpense}{" "}
+                    Total Expense: {calculateYearlyStats(oneYear).totalExpense.toFixed(2)}{" "}
                     €
                   </p>
                   <p>

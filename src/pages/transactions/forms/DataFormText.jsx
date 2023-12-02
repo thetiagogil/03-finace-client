@@ -8,7 +8,6 @@ const DataForm = ({
   category,
   subCategory,
   value,
-  currency,
   date,
   description,
   setCategory,

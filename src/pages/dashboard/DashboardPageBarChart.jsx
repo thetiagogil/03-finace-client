@@ -1,10 +1,12 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const MonthsPageLineChart = ({ chartData }) => {
   return (
-    <Line
+    <Bar
       data={chartData}
       options={{
         maintainAspectRatio: false,
@@ -18,19 +20,12 @@ const MonthsPageLineChart = ({ chartData }) => {
           y: {
             beginAtZero: true,
             grid: {
-              color: "rgba(0, 0, 0, 0.1)",
+              color: "rgba(0, 0, 0, 0.05)",
             },
             ticks: {
               callback: function (value) {
                 return value + " €";
               },
-            },
-          },
-        },
-        tooltips: {
-          callbacks: {
-            label: function (context) {
-              return context.yLabel + ' €';
             },
           },
         },

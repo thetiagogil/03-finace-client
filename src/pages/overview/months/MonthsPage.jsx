@@ -85,6 +85,8 @@ const MonthsPage = ({ typeProp }) => {
       }
     });
 
+    subCatArray.sort();
+
     return subCatArray;
   };
 
@@ -174,7 +176,8 @@ const MonthsPage = ({ typeProp }) => {
     return filteredDataSum;
   };
 
-  const [lineChartData, setLineChartData] = useState({
+  // LINE CHART
+  const lineChart = {
     labels: monthsArrayShort,
     datasets: [
       {
@@ -182,21 +185,15 @@ const MonthsPage = ({ typeProp }) => {
         data: monthsArray.map((month) => filterByMonth(month)),
       },
     ],
-  });
+  };
+
+  const [lineChartData, setLineChartData] = useState(lineChart);
 
   // EFFECT TO FETCH DATA
   useEffect(() => {
     readAllData();
     if (dataLoaded) {
-      setLineChartData({
-        labels: monthsArrayShort,
-        datasets: [
-          {
-            label: `${year} Monthly ${typeUpperCase} Values`,
-            data: monthsArray.map((month) => filterByMonth(month)),
-          },
-        ],
-      });
+      setLineChartData(lineChart);
     }
   }, [currentUser, dataLoaded, typeProp]);
 

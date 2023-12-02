@@ -168,18 +168,27 @@ const TransactionsPage = ({ typeProp }) => {
 
   // GET THE LAST DATE
   const getLastRecordedDate = () => {
+    // YOU FIRST NEED TO CHECK IF THERE IS DATA
     if (data.length === 0) {
       return { lastDate: "No data available", daysAgo: "N/A" };
     }
 
     const trackedData = data.filter((data) => data.type === "Tracked");
+    const validTrackedData = trackedData.filter((data) => data.date);
 
-    const sortedTrackedData = [...trackedData].sort(
+    if (validTrackedData.length === 0) {
+      return { lastDate: "No data available", daysAgo: "N/A" };
+    }
+
+    // AND THEN YOU SORT IT OUT
+    const sortedTrackedData = [...validTrackedData].sort(
       (a, b) => new Date(b.date) - new Date(a.date)
     );
 
     const mostRecentTrackedData = sortedTrackedData[0];
-    const mostRecentTrackedDate = new Date(mostRecentTrackedData.date);
+    const mostRecentTrackedDate = mostRecentTrackedData
+      ? new Date(mostRecentTrackedData.date)
+      : null;
 
     const today = new Date();
     const daysAgo = Math.floor(

@@ -95,35 +95,27 @@
 
 .dash-summary {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
 .dash-summary-category-chart {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
 }
 
-.dash-summary-income-chart {
+.dash-summary-donut-chart {
   background-color: white;
-  width: 22.5rem;
-  height: 11rem;
+  width: 22rem;
+  height: 15rem;
   padding: 1rem;
   border-radius: 0.5rem;
 }
 
-.dash-summary-expense-chart {
+.dash-summary-bar-chart {
   background-color: white;
-  width: 22.5rem;
-  height: 11rem;
-  padding: 1rem;
-  border-radius: 0.5rem;
-}
-
-.dash-summary-type-chart {
-  background-color: white;
-  width: 22.5rem;
-  height: 25rem;
+  width: 47rem;
+  height: 20rem;
   padding: 1rem;
   border-radius: 0.5rem;
 }
