@@ -27,13 +27,6 @@ const MonthsPageLineChart = ({ chartData }) => {
             },
           },
         },
-        tooltips: {
-          callbacks: {
-            label: function (context) {
-              return context.yLabel + ' €';
-            },
-          },
-        },
       }}
     />
   );

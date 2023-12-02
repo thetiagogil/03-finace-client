@@ -1,3 +1,26 @@
+/* FILTER BUTTONS */
+.dash-filters {
+  width: 90rem;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.dash-filters select {
+  height: 1.5rem;
+  font-size: 0.9rem;
+  outline: none;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 1rem;
+  margin: 0 0.5rem 0;
+  padding: 0 1rem 0;
+  appearance: none;
+}
+
+.dash-filters select option {
+  text-align: center;
+}
+
 /* DASHBOARD BIG BOX */
 .dash-box {
   margin-top: 2rem;

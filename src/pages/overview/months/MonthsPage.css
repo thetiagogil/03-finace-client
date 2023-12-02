@@ -3,7 +3,7 @@
   margin-top: 2rem;
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1rem;
 }
 .over-info {
   background-color: white;
@@ -12,9 +12,46 @@
   padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
-.over-info-chart {
+
+.over-info h1 {
+  color: rgb(20, 80, 140, 0.8);
+  font-size: 2.5rem;
+}
+
+.over-info-overall-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.over-info-overall {
+  background-color: rgb(20, 80, 140, 0.6);
+  color: white;
+  height: 3rem;
+  width: 6rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.over-info-donutChart-box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.over-info-donutChart {
+  width: 45%;
+}
+
+.over-info-lineChart {
   background-color: white;
   width: 50rem;
   height: 20rem;

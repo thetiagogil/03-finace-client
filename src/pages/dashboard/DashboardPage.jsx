@@ -11,7 +11,7 @@ const DashboardPage = () => {
   const [data, setData] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+  const [selectedMonth, setSelectedMonth] = useState();
 
   // FETCH DATA
   const readAllData = async () => {
@@ -37,7 +37,7 @@ const DashboardPage = () => {
       console.log(error);
     }
   };
-
+  console.log(data);
   // MONTHS ARRAY
   const monthsArray = [
     "January",
@@ -74,10 +74,14 @@ const DashboardPage = () => {
     let subCatArray = [];
 
     data.map((oneData) => {
+      const oneDataYear = new Date(oneData.date).getFullYear();
+      const oneDataMonth = monthsArray[new Date(oneData.date).getMonth()];
+
       if (
         !subCatArray.includes(oneData.subCategory) &&
         oneData.category === category &&
-        new Date(oneData.date).getFullYear() === Number(selectedYear)
+        (!selectedYear || oneDataYear === Number(selectedYear)) &&
+        (!selectedMonth || oneDataMonth === selectedMonth)
       ) {
         subCatArray.push(oneData.subCategory);
       }
@@ -132,6 +136,11 @@ const DashboardPage = () => {
       .filter(
         (oneData) =>
           new Date(oneData.date).getFullYear() === Number(selectedYear)
+      )
+      .filter(
+        (oneData) =>
+          !selectedMonth ||
+          monthsArray[new Date(oneData.date).getMonth()] === selectedMonth
       );
 
     const plannedFilteredData = data
@@ -140,6 +149,11 @@ const DashboardPage = () => {
       .filter(
         (oneData) =>
           new Date(oneData.date).getFullYear() === Number(selectedYear)
+      )
+      .filter(
+        (oneData) =>
+          !selectedMonth ||
+          monthsArray[new Date(oneData.date).getMonth()] === selectedMonth
       );
 
     // then reduce each filtered array
@@ -316,28 +330,44 @@ const DashboardPage = () => {
         data: monthsArray.map((month) =>
           filterByMonth(month, "Income", "Tracked")
         ),
-        backgroundColor: "rgb(20, 80, 140, 0.6)",
+        backgroundColor: monthsArray.map((month) =>
+          !selectedMonth || selectedMonth === month
+            ? "rgb(20, 80, 140, 0.8)"
+            : "rgb(20, 80, 140, 0.2)"
+        ),
       },
       {
         label: "Income Planned",
         data: monthsArray.map((month) =>
           filterByMonth(month, "Income", "Planned")
         ),
-        backgroundColor: "rgb(20, 80, 140, 0.3)",
+        backgroundColor: monthsArray.map((month) =>
+          !selectedMonth || selectedMonth === month
+            ? "rgb(20, 80, 140, 0.4)"
+            : "rgb(20, 80, 140, 0.1)"
+        ),
       },
       {
         label: "Expense Tracked",
         data: monthsArray.map((month) =>
           filterByMonth(month, "Expense", "Tracked")
         ),
-        backgroundColor: "rgb(80, 20, 100, 0.6)",
+        backgroundColor: monthsArray.map((month) =>
+          !selectedMonth || selectedMonth === month
+            ? "rgb(80, 20, 100, 0.8)"
+            : "rgb(80, 20, 100, 0.2)"
+        ),
       },
       {
         label: "Expense Planned",
         data: monthsArray.map((month) =>
           filterByMonth(month, "Expense", "Planned")
         ),
-        backgroundColor: "rgb(80, 20, 100, 0.3)",
+        backgroundColor: monthsArray.map((month) =>
+          !selectedMonth || selectedMonth === month
+            ? "rgb(80, 20, 100, 0.4)"
+            : "rgb(80, 20, 100, 0.1)"
+        ),
       },
     ],
   };
@@ -356,32 +386,36 @@ const DashboardPage = () => {
     };
 
     fetchData();
-  }, [currentUser, dataLoaded, Number(selectedYear), selectedMonth]);
+  }, [currentUser, dataLoaded, selectedYear, selectedMonth]);
 
   return (
     <div className="container">
-      <div>
+      <div className="dash-filters">
         <select
           value={Number(selectedYear)}
           onChange={(event) => setSelectedYear(event.target.value)}
         >
-          {filterByYears().map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
+          {filterByYears().map((year) => {
+            return (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            );
+          })}
         </select>
 
         <select
           value={selectedMonth}
           onChange={(event) => setSelectedMonth(event.target.value)}
         >
-          <option value="all">All Year</option>
-          {monthsArray.map((month) => (
-            <option key={month} value={month}>
-              {month}
-            </option>
-          ))}
+          <option value="">All year</option>
+          {monthsArray.map((month) => {
+            return (
+              <option key={month} value={month}>
+                {month}
+              </option>
+            );
+          })}
         </select>
       </div>
 
@@ -415,11 +449,11 @@ const DashboardPage = () => {
                   return (
                     <tr key={indexSubCat}>
                       <td>{oneSubCat}</td>
-                      <td>{trackedSum.toFixed(2)} €</td>
-                      <td>{plannedSum.toFixed(2)} €</td>
+                      <td>{trackedSum.toFixed(0)} €</td>
+                      <td>{plannedSum.toFixed(0)} €</td>
                       <td>{percentCompletion.toFixed(0)} %</td>
-                      <td>{remaining.toFixed(2)} €</td>
-                      <td>{excess.toFixed(2)} €</td>
+                      <td>{remaining.toFixed(0)} €</td>
+                      <td>{excess.toFixed(0)} €</td>
                     </tr>
                   );
                 })}
@@ -427,11 +461,11 @@ const DashboardPage = () => {
                 <tr>
                   <td>Total</td>
                   <td>
-                    {calculateTotalValues("Income").totalTrackedSum.toFixed(2)}{" "}
+                    {calculateTotalValues("Income").totalTrackedSum.toFixed(0)}{" "}
                     €
                   </td>
                   <td>
-                    {calculateTotalValues("Income").totalPlannedSum.toFixed(2)}{" "}
+                    {calculateTotalValues("Income").totalPlannedSum.toFixed(0)}{" "}
                     €
                   </td>
                   <td>
@@ -441,10 +475,10 @@ const DashboardPage = () => {
                     %
                   </td>
                   <td>
-                    {calculateTotalValues("Income").totalRemaining.toFixed(2)} €
+                    {calculateTotalValues("Income").totalRemaining.toFixed(0)} €
                   </td>
                   <td>
-                    {calculateTotalValues("Income").totalExcess.toFixed(2)} €
+                    {calculateTotalValues("Income").totalExcess.toFixed(0)} €
                   </td>
                 </tr>
               </tbody>
@@ -477,11 +511,11 @@ const DashboardPage = () => {
                   return (
                     <tr key={indexSubCat}>
                       <td>{oneSubCat}</td>
-                      <td>{trackedSum.toFixed(2)} €</td>
-                      <td>{plannedSum.toFixed(2)} €</td>
+                      <td>{trackedSum.toFixed(0)} €</td>
+                      <td>{plannedSum.toFixed(0)} €</td>
                       <td>{percentCompletion.toFixed(0)} %</td>
-                      <td>{remaining.toFixed(2)} €</td>
-                      <td>{excess.toFixed(2)} €</td>
+                      <td>{remaining.toFixed(0)} €</td>
+                      <td>{excess.toFixed(0)} €</td>
                     </tr>
                   );
                 })}
@@ -489,11 +523,11 @@ const DashboardPage = () => {
                 <tr>
                   <td>Total</td>
                   <td>
-                    {calculateTotalValues("Expense").totalTrackedSum.toFixed(2)}{" "}
+                    {calculateTotalValues("Expense").totalTrackedSum.toFixed(0)}{" "}
                     €
                   </td>
                   <td>
-                    {calculateTotalValues("Expense").totalPlannedSum.toFixed(2)}{" "}
+                    {calculateTotalValues("Expense").totalPlannedSum.toFixed(0)}{" "}
                     €
                   </td>
                   <td>
@@ -503,11 +537,11 @@ const DashboardPage = () => {
                     %
                   </td>
                   <td>
-                    {calculateTotalValues("Expense").totalRemaining.toFixed(2)}{" "}
+                    {calculateTotalValues("Expense").totalRemaining.toFixed(0)}{" "}
                     €
                   </td>
                   <td>
-                    {calculateTotalValues("Expense").totalExcess.toFixed(2)} €
+                    {calculateTotalValues("Expense").totalExcess.toFixed(0)} €
                   </td>
                 </tr>
               </tbody>

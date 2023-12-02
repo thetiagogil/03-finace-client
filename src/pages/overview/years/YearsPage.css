@@ -6,9 +6,9 @@
 }
 
 .over-oneYearBox {
-  background: linear-gradient(to bottom, rgb(35, 45, 55) 40%, white 40%);
+  background: linear-gradient(to bottom, rgb(20, 80, 140, 0.8) 40%, white 40%);
   color: rgb(35, 45, 55);
-  width: 15rem;
+  width: 14rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@
 }
 
 .over-oneYearBox:hover {
-  background: linear-gradient(to bottom, rgb(35, 45, 55, 0.8) 40%, white 40%);
+  background: linear-gradient(to bottom, rgb(20, 80, 140) 40%, white 40%);
 }
 
 .over-oneYearBox h3 {

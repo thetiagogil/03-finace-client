@@ -156,6 +156,11 @@
   padding: 0.3rem 0 0.3rem;
 }
 
+.tran-table td:nth-child(6) img,
+.tran-table td:nth-child(7) img {
+  height: 1.1rem;
+}
+
 .tran-table td:nth-child(6) button,
 .tran-table td:nth-child(7) button {
   background-color: transparent;
@@ -163,11 +168,6 @@
   filter: opacity(20%);
   padding: 0;
   transition-duration: 0.3s;
-}
-
-.tran-table td:nth-child(6) img,
-.tran-table td:nth-child(7) img {
-  height: 1.1rem;
 }
 
 .tran-table td:nth-child(6) button:hover,
