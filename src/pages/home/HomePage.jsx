@@ -77,7 +77,7 @@ const HomePage = () => {
           </section>
         </div>
       </div>
-      <p>Nattanan Kanchanaprat</p>
+      {/* <p>Nattanan Kanchanaprat</p> */}
     </div>
   );
 };

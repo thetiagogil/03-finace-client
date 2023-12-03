@@ -17,10 +17,6 @@
   appearance: none;
 }
 
-.dash-filters select option {
-  text-align: center;
-}
-
 /* DASHBOARD BIG BOX */
 .dash-box {
   margin-top: 2rem;

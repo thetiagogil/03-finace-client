@@ -36,10 +36,6 @@
   appearance: none;
 }
 
-.tran-managementBox select option {
-  text-align: center;
-}
-
 .tran-managementBox button {
   height: 1.3rem;
   width: 1.3rem;
