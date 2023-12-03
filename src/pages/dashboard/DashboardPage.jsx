@@ -37,7 +37,7 @@ const DashboardPage = () => {
       console.log(error);
     }
   };
-  console.log(data);
+
   // MONTHS ARRAY
   const monthsArray = [
     "January",
@@ -267,8 +267,6 @@ const DashboardPage = () => {
     return sumOfOther;
   };
 
-  console.log(calculateTopSubcategories("Income"));
-
   // INCOME DONUT CHART
   const donutChartIncome = {
     labels: [
@@ -390,185 +388,216 @@ const DashboardPage = () => {
 
   return (
     <div className="container">
-      <div className="dash-filters">
-        <select
-          value={Number(selectedYear)}
-          onChange={(event) => setSelectedYear(event.target.value)}
-        >
-          {filterByYears().map((year) => {
-            return (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            );
-          })}
-        </select>
+      {data.length <= 0 && (
+        <p className="noDataCreated">
+          data needs to be created on the Transactions panel
+        </p>
+      )}
 
-        <select
-          value={selectedMonth}
-          onChange={(event) => setSelectedMonth(event.target.value)}
-        >
-          <option value="">All year</option>
-          {monthsArray.map((month) => {
-            return (
-              <option key={month} value={month}>
-                {month}
-              </option>
-            );
-          })}
-        </select>
-      </div>
+      {data.length > 0 && (
+        <>
+          <div className="dash-filters">
+            <select
+              value={Number(selectedYear)}
+              onChange={(event) => setSelectedYear(event.target.value)}
+            >
+              {filterByYears().map((year) => {
+                return (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                );
+              })}
+            </select>
 
-      <div className="dash-box">
-        <div className="dash-table-box">
-          <h2>Breakdown</h2>
-
-          <div className="dash-table">
-            <table className="dash-table-income">
-              <thead>
-                <tr>
-                  <th>Incomes</th>
-                  <th>Tracked</th>
-                  <th>Planned</th>
-                  <th>% Compl.</th>
-                  <th>Remaining</th>
-                  <th>Excess</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {subCategoryArray("Income").map((oneSubCat, indexSubCat) => {
-                  const {
-                    trackedSum,
-                    plannedSum,
-                    percentCompletion,
-                    remaining,
-                    excess,
-                  } = calculateSubCategoryValues(oneSubCat);
-
-                  return (
-                    <tr key={indexSubCat}>
-                      <td>{oneSubCat}</td>
-                      <td>{trackedSum.toFixed(0)} €</td>
-                      <td>{plannedSum.toFixed(0)} €</td>
-                      <td>{percentCompletion.toFixed(0)} %</td>
-                      <td>{remaining.toFixed(0)} €</td>
-                      <td>{excess.toFixed(0)} €</td>
-                    </tr>
-                  );
-                })}
-
-                <tr>
-                  <td>Total</td>
-                  <td>
-                    {calculateTotalValues("Income").totalTrackedSum.toFixed(0)}{" "}
-                    €
-                  </td>
-                  <td>
-                    {calculateTotalValues("Income").totalPlannedSum.toFixed(0)}{" "}
-                    €
-                  </td>
-                  <td>
-                    {calculateTotalValues(
-                      "Income"
-                    ).avgPercentCompletion.toFixed(0)}{" "}
-                    %
-                  </td>
-                  <td>
-                    {calculateTotalValues("Income").totalRemaining.toFixed(0)} €
-                  </td>
-                  <td>
-                    {calculateTotalValues("Income").totalExcess.toFixed(0)} €
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <select
+              value={selectedMonth}
+              onChange={(event) => setSelectedMonth(event.target.value)}
+            >
+              <option value="">All year</option>
+              {monthsArray.map((month) => {
+                return (
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
+                );
+              })}
+            </select>
           </div>
 
-          <div className="dash-table">
-            <table className="dash-table-expense">
-              <thead>
-                <tr>
-                  <th>Expenses</th>
-                  <th>Tracked</th>
-                  <th>Planned</th>
-                  <th>% Compl.</th>
-                  <th>Remaining</th>
-                  <th>Excess</th>
-                </tr>
-              </thead>
+          <div className="dash-box">
+            <div className="dash-table-box">
+              <h2>Breakdown</h2>
 
-              <tbody>
-                {subCategoryArray("Expense").map((oneSubCat, indexSubCat) => {
-                  const {
-                    trackedSum,
-                    plannedSum,
-                    percentCompletion,
-                    remaining,
-                    excess,
-                  } = calculateSubCategoryValues(oneSubCat);
-
-                  return (
-                    <tr key={indexSubCat}>
-                      <td>{oneSubCat}</td>
-                      <td>{trackedSum.toFixed(0)} €</td>
-                      <td>{plannedSum.toFixed(0)} €</td>
-                      <td>{percentCompletion.toFixed(0)} %</td>
-                      <td>{remaining.toFixed(0)} €</td>
-                      <td>{excess.toFixed(0)} €</td>
+              <div className="dash-table">
+                <table className="dash-table-income">
+                  <thead>
+                    <tr>
+                      <th>Incomes</th>
+                      <th>Tracked</th>
+                      <th>Planned</th>
+                      <th>% Compl.</th>
+                      <th>Remaining</th>
+                      <th>Excess</th>
                     </tr>
-                  );
-                })}
+                  </thead>
 
-                <tr>
-                  <td>Total</td>
-                  <td>
-                    {calculateTotalValues("Expense").totalTrackedSum.toFixed(0)}{" "}
-                    €
-                  </td>
-                  <td>
-                    {calculateTotalValues("Expense").totalPlannedSum.toFixed(0)}{" "}
-                    €
-                  </td>
-                  <td>
-                    {calculateTotalValues(
-                      "Expense"
-                    ).avgPercentCompletion.toFixed(0)}{" "}
-                    %
-                  </td>
-                  <td>
-                    {calculateTotalValues("Expense").totalRemaining.toFixed(0)}{" "}
-                    €
-                  </td>
-                  <td>
-                    {calculateTotalValues("Expense").totalExcess.toFixed(0)} €
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+                  <tbody>
+                    {subCategoryArray("Income").map(
+                      (oneSubCat, indexSubCat) => {
+                        const {
+                          trackedSum,
+                          plannedSum,
+                          percentCompletion,
+                          remaining,
+                          excess,
+                        } = calculateSubCategoryValues(oneSubCat);
 
-        <div className="dash-summary-box">
-          <h2>Summary</h2>
+                        return (
+                          <tr key={indexSubCat}>
+                            <td>{oneSubCat}</td>
+                            <td>{trackedSum.toFixed(0)} €</td>
+                            <td>{plannedSum.toFixed(0)} €</td>
+                            <td>{percentCompletion.toFixed(0)} %</td>
+                            <td>{remaining.toFixed(0)} €</td>
+                            <td>{excess.toFixed(0)} €</td>
+                          </tr>
+                        );
+                      }
+                    )}
 
-          <div className="dash-summary">
-            <div className="dash-summary-category-chart">
-              <div className="dash-summary-donut-chart">
-                <DashboardPageDonutChart chartData={donutChartIncomeData} />
+                    <tr>
+                      <td>Total</td>
+                      <td>
+                        {calculateTotalValues("Income").totalTrackedSum.toFixed(
+                          0
+                        )}{" "}
+                        €
+                      </td>
+                      <td>
+                        {calculateTotalValues("Income").totalPlannedSum.toFixed(
+                          0
+                        )}{" "}
+                        €
+                      </td>
+                      <td>
+                        {calculateTotalValues(
+                          "Income"
+                        ).avgPercentCompletion.toFixed(0)}{" "}
+                        %
+                      </td>
+                      <td>
+                        {calculateTotalValues("Income").totalRemaining.toFixed(
+                          0
+                        )}{" "}
+                        €
+                      </td>
+                      <td>
+                        {calculateTotalValues("Income").totalExcess.toFixed(0)}{" "}
+                        €
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
-              <div className="dash-summary-donut-chart">
-                <DashboardPageDonutChart chartData={donutChartExpenseData} />
+              <div className="dash-table">
+                <table className="dash-table-expense">
+                  <thead>
+                    <tr>
+                      <th>Expenses</th>
+                      <th>Tracked</th>
+                      <th>Planned</th>
+                      <th>% Compl.</th>
+                      <th>Remaining</th>
+                      <th>Excess</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {subCategoryArray("Expense").map(
+                      (oneSubCat, indexSubCat) => {
+                        const {
+                          trackedSum,
+                          plannedSum,
+                          percentCompletion,
+                          remaining,
+                          excess,
+                        } = calculateSubCategoryValues(oneSubCat);
+
+                        return (
+                          <tr key={indexSubCat}>
+                            <td>{oneSubCat}</td>
+                            <td>{trackedSum.toFixed(0)} €</td>
+                            <td>{plannedSum.toFixed(0)} €</td>
+                            <td>{percentCompletion.toFixed(0)} %</td>
+                            <td>{remaining.toFixed(0)} €</td>
+                            <td>{excess.toFixed(0)} €</td>
+                          </tr>
+                        );
+                      }
+                    )}
+
+                    <tr>
+                      <td>Total</td>
+                      <td>
+                        {calculateTotalValues(
+                          "Expense"
+                        ).totalTrackedSum.toFixed(0)}{" "}
+                        €
+                      </td>
+                      <td>
+                        {calculateTotalValues(
+                          "Expense"
+                        ).totalPlannedSum.toFixed(0)}{" "}
+                        €
+                      </td>
+                      <td>
+                        {calculateTotalValues(
+                          "Expense"
+                        ).avgPercentCompletion.toFixed(0)}{" "}
+                        %
+                      </td>
+                      <td>
+                        {calculateTotalValues("Expense").totalRemaining.toFixed(
+                          0
+                        )}{" "}
+                        €
+                      </td>
+                      <td>
+                        {calculateTotalValues("Expense").totalExcess.toFixed(0)}{" "}
+                        €
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
-            <div className="dash-summary-bar-chart">
-              <DashboardPageBarChart chartData={barChartData} />
+            <div className="dash-summary-box">
+              <h2>Summary</h2>
+
+              <div className="dash-summary">
+                <div className="dash-summary-category-chart">
+                  <div className="dash-summary-donut-chart">
+                    <DashboardPageDonutChart chartData={donutChartIncomeData} />
+                  </div>
+
+                  <div className="dash-summary-donut-chart">
+                    <DashboardPageDonutChart
+                      chartData={donutChartExpenseData}
+                    />
+                  </div>
+                </div>
+
+                <div className="dash-summary-bar-chart">
+                  <DashboardPageBarChart chartData={barChartData} />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };

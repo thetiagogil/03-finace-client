@@ -45,3 +45,11 @@ p {
 ::-webkit-scrollbar-thumb {
   background: rgb(20, 60, 80);
 }
+
+.noDataCreated {
+  color: gray;
+  margin: 4rem;
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+}

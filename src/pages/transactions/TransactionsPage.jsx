@@ -254,64 +254,68 @@ const TransactionsPage = ({ typeProp }) => {
 
       <div className="tran-managementBox">
         <section></section>
-        <section>
-          {/* SELECT FOR YEARS*/}
-          <select
-            onChange={(event) => setSelectedYear(event.target.value)}
-            value={selectedYear}
-          >
-            <option value="">Filter by year</option>
-            {filterByYears().map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-
-          {/* SELECT FOR MONTH */}
-          <select
-            onChange={(event) => setSelectedMonth(event.target.value)}
-            value={selectedMonth}
-          >
-            <option value="">Filter by month</option>
-            {monthsArray.map((month) => {
-              return (
-                <option key={month} value={month}>
-                  {month}
+        {data.length > 0 && (
+          <section>
+            {/* SELECT FOR YEARS*/}
+            <select
+              onChange={(event) => setSelectedYear(event.target.value)}
+              value={selectedYear}
+            >
+              <option value="">Filter by year</option>
+              {filterByYears().map((year) => (
+                <option key={year} value={year}>
+                  {year}
                 </option>
-              );
-            })}
-          </select>
+              ))}
+            </select>
 
-          {/* SELECT FOR CATEGORY */}
-          <select
-            onChange={(event) => setSelectedCategory(event.target.value)}
-            value={selectedCategory}
-          >
-            <option value="">Filter by category</option>
-            {filterByCategory().map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
+            {/* SELECT FOR MONTH */}
+            <select
+              onChange={(event) => setSelectedMonth(event.target.value)}
+              value={selectedMonth}
+            >
+              <option value="">Filter by month</option>
+              {monthsArray.map((month) => {
+                return (
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
+                );
+              })}
+            </select>
 
-          {/* SELECT FOR CATEGORY */}
-          <select
-            onChange={(event) => setSelectedSubCategory(event.target.value)}
-            value={selectedSubCategory}
-          >
-            <option value="">Filter by sub category</option>
-            {filterBySubCategory().map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-        </section>
+            {/* SELECT FOR CATEGORY */}
+            <select
+              onChange={(event) => setSelectedCategory(event.target.value)}
+              value={selectedCategory}
+            >
+              <option value="">Filter by category</option>
+              {filterByCategory().map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+
+            {/* SELECT FOR CATEGORY */}
+            <select
+              onChange={(event) => setSelectedSubCategory(event.target.value)}
+              value={selectedSubCategory}
+            >
+              <option value="">Filter by sub category</option>
+              {filterBySubCategory().map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+          </section>
+        )}
 
         {/* CREATE DATA FORM */}
+
         <section>
+          {data.length <= 0 && <p>create some data here ---{">"}</p>}
           <button onClick={handleShowForm}>
             <img src={crossIcon} />
           </button>
@@ -333,10 +337,10 @@ const TransactionsPage = ({ typeProp }) => {
       <div className="tran-tableBox">
         {/* DATA TABLE */}
         {!handleDataExists() && (
-          <p className="tran-table-noData">there is no data created</p>
+          <p className="noDataCreated">there is no data created</p>
         )}
         {handleDataExists() && !dataFiltered().length > 0 && (
-          <p className="tran-table-noData">there is no matching data</p>
+          <p className="noDataCreated">there is no matching data</p>
         )}
         {handleDataExists() && dataFiltered().length > 0 && (
           <table className="tran-table">

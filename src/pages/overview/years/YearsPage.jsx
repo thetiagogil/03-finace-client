@@ -85,8 +85,15 @@ const YearsPage = ({ pageProp, typeProp }) => {
 
   return (
     <div className="container">
+      {data.length <= 0 && (
+        <p className="noDataCreated">
+          data needs to be created on the Transactions panel
+        </p>
+      )}
+
       <div className="over-yearsBox">
         {dataLoaded &&
+          data.length > 0 &&
           yearsArray().map((oneYear, index) => (
             <Link to={`/${pageProp}/${typeProp}/${oneYear}`} key={index}>
               <div className="over-oneYearBox">

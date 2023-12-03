@@ -55,20 +55,21 @@
   height: 1.3rem;
 }
 
+.tran-managementBox section:last-child {
+  display: flex;
+}
+
+.tran-managementBox p {
+  color: lightgray;
+  font-style: italic;
+  margin-right: 1rem;
+}
+
 /* DATA TABLE BOX */
 .tran-tableBox {
   width: 70vw;
   margin: 2rem;
   height: 30rem;
-}
-
-/* DATA DOES NOT EXIST OR IS NOT MATCHED*/
-.tran-table-noData {
-  color: gray;
-  margin: 2rem;
-  font-style: italic;
-  display: flex;
-  justify-content: center;
 }
 
 /* DATA EXISTS */
