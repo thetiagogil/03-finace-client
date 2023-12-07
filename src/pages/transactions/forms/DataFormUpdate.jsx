@@ -18,8 +18,6 @@ const DataFormUpdate = ({ oneData, typeProp, handleCloseForm }) => {
     oneData.description
   );
 
-  console.log("oneData.date:", oneData.date);
-
   const typeUpperCase = typeProp.charAt(0).toUpperCase() + typeProp.slice(1);
 
   const updatedPayload = {
@@ -57,22 +55,24 @@ const DataFormUpdate = ({ oneData, typeProp, handleCloseForm }) => {
     }
   };
 
-  return (<DataFormText
-    formType="Update"
-    handleCloseForm={handleCloseForm}
-    category={updatedCategory}
-    subCategory={updatedSubCategory}
-    value={updatedValue}
-    currency={updatedCurrency}
-    date={updatedDate}
-    description={updatedDescription}
-    setCategory={setUpdatedCategory}
-    setSubCategory={setUpdatedSubCategory}
-    setValue={setUpdatedValue}
-    setCurrency={setUpdatedCurrency}
-    setDate={setUpdatedDate}
-    setDescription={setUpdatedDescription}
-    functionType={updateData} />
+  return (
+    <DataFormText
+      formType="Update"
+      handleCloseForm={handleCloseForm}
+      category={updatedCategory}
+      subCategory={updatedSubCategory}
+      value={updatedValue}
+      currency={updatedCurrency}
+      date={updatedDate}
+      description={updatedDescription}
+      setCategory={setUpdatedCategory}
+      setSubCategory={setUpdatedSubCategory}
+      setValue={setUpdatedValue}
+      setCurrency={setUpdatedCurrency}
+      setDate={setUpdatedDate}
+      setDescription={setUpdatedDescription}
+      functionType={updateData}
+    />
   );
 };
 
