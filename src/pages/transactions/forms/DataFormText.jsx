@@ -16,6 +16,7 @@ const DataForm = ({
   setDate,
   setDescription,
   functionType,
+  updateDataOnSubmit,
 }) => {
   // CATEGORY ARRAY
   const categoriesArray = ["Income", "Expense"];
@@ -23,6 +24,8 @@ const DataForm = ({
   const handleSubmit = (event) => {
     event.preventDefault();
     functionType();
+    updateDataOnSubmit();
+    handleCloseForm();
   };
 
   return (

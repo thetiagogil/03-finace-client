@@ -223,6 +223,11 @@ const TransactionsPage = ({ typeProp }) => {
     "December",
   ];
 
+  // UPDATE DATA AFTER FORM SUBMIT
+  const updateDataOnSubmit = async () => {
+    await readAllData();
+  };
+
   // EFFECT TO FETCH DATA
   useEffect(() => {
     readAllData();
@@ -315,7 +320,6 @@ const TransactionsPage = ({ typeProp }) => {
         )}
 
         {/* CREATE DATA FORM */}
-
         <section>
           {data.length <= 0 && <p>create some data here ---{">"}</p>}
           <button onClick={handleShowForm}>
@@ -331,6 +335,7 @@ const TransactionsPage = ({ typeProp }) => {
               data={data}
               typeProp={typeProp}
               handleCloseForm={handleCloseForm}
+              updateDataOnSubmit={updateDataOnSubmit}
             />
           </div>
         )}

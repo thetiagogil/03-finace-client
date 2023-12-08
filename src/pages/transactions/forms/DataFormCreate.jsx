@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import DataFormText from "./DataFormText";
 
-const DataFormCreate = ({ typeProp, handleCloseForm }) => {
+const DataFormCreate = ({ typeProp, handleCloseForm, updateDataOnSubmit }) => {
   const token = localStorage.getItem("authToken");
   const { currentUser } = useContext(AuthContext);
 
@@ -44,22 +44,26 @@ const DataFormCreate = ({ typeProp, handleCloseForm }) => {
     }
   };
 
-  return <DataFormText
-  formType="Create"
-  handleCloseForm={handleCloseForm}
-  category={category}
-  subCategory={subCategory}
-  value={value}
-  currency={currency}
-  date={date}
-  description={description}
-  setCategory={setCategory}
-  setSubCategory={setSubCategory}
-  setValue={setValue}
-  setCurrency={setCurrency}
-  setDate={setDate}
-  setDescription={setDescription}
-  functionType={createData} />;
+  return (
+    <DataFormText
+      formType="Create"
+      handleCloseForm={handleCloseForm}
+      category={category}
+      subCategory={subCategory}
+      value={value}
+      currency={currency}
+      date={date}
+      description={description}
+      setCategory={setCategory}
+      setSubCategory={setSubCategory}
+      setValue={setValue}
+      setCurrency={setCurrency}
+      setDate={setDate}
+      setDescription={setDescription}
+      functionType={createData}
+      updateDataOnSubmit={updateDataOnSubmit}
+    />
+  );
 };
 
 export default DataFormCreate;
