@@ -72,6 +72,8 @@ const TransactionsPage = ({ typeProp }) => {
       );
     });
 
+    console.log(filteredData);
+
     return filteredData;
   };
 
