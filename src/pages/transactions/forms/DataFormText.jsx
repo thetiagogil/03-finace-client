@@ -13,7 +13,6 @@ const DataForm = ({
   setCategory,
   setSubCategory,
   setValue,
-  setCurrency,
   setDate,
   setDescription,
   functionType,
@@ -21,8 +20,13 @@ const DataForm = ({
   // CATEGORY ARRAY
   const categoriesArray = ["Income", "Expense"];
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    functionType();
+  };
+
   return (
-    <form className="data-form">
+    <form className="data-form" onSubmit={handleSubmit}>
       <div className="data-form-header">
         <h2>{formType} Data</h2>
         <button onClick={handleCloseForm}>
@@ -101,7 +105,7 @@ const DataForm = ({
 
       <div>
         <button
-          type="submit"
+          type="button"
           onClick={() => {
             functionType();
           }}
