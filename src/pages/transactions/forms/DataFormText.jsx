@@ -23,7 +23,6 @@ const DataForm = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    functionType();
     updateDataOnSubmit();
     handleCloseForm();
   };
@@ -108,7 +107,7 @@ const DataForm = ({
 
       <div>
         <button
-          type="button"
+          type="submit"
           onClick={() => {
             functionType();
           }}
