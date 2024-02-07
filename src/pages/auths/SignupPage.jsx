@@ -44,7 +44,7 @@ const SignupPage = () => {
         await response.json();
         navigate("/login");
       } else {
-        setError("Signup failed. Please try again.");
+        setError("Sign Up failed. Please try again.");
       }
     } catch (error) {
       setError("An error occurred. Please try again later.");

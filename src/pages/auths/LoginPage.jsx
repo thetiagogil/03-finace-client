@@ -8,7 +8,7 @@ const LoginPage = () => {
   const { handleLogin } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,7 +27,14 @@ const LoginPage = () => {
       );
       if (response.status === 400) {
         const parsed = await response.json();
-        throw new Error(parsed.message);
+
+        if (parsed.message === "User not found") {
+          setError("User not found. Please check your username.");
+        } else if (parsed.message === "Invalid password") {
+          setError("Invalid password. Please check your password.");
+        } else {
+          throw new Error(parsed.message);
+        }
       }
       if (response.status === 200) {
         const parsed = await response.json();
@@ -36,14 +43,16 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.log(error);
-      setErrorMessage(error.message);
+      setError(error.message);
     }
   };
 
   return (
     <div className="container">
       <div className="auths-box">
-        <Link to="/" className="auths-home-button">{"<"} back to home page</Link>
+        <Link to="/" className="auths-home-button">
+          {"<"} back to home page
+        </Link>
 
         <form onSubmit={handleSubmit} className="auths-form">
           <h2>Log in to Fin/Ace</h2>
@@ -68,6 +77,8 @@ const LoginPage = () => {
               />
             </label>
           </div>
+
+          {error && <p className="auths-form-error-p">{error}</p>}
 
           <button>Log In</button>
 
